@@ -1,18 +1,35 @@
 require 'highline'
+require 'jekyllposter/common'
 
-module Questions
-  class Post
-    def initialize
+module Jekyllposter
+  module Questions
+    HL = HighLine.new
+
+    class Post
+      include Jekyllposter::Common
+
+      attr :published
+
+      def initialize
+        @published = nil
+      end
+
+      def ask
+      end
     end
-  end
 
-  class Page
-    def initialize
+    class Page
+      include Jekyllposter::Common
+
+      def initialize
+      end
     end
-  end
 
-  class Draft
-    def initialize
+    class Draft
+      include Jekyllposter::Common
+
+      def initialize
+      end
     end
   end
 end

@@ -1,5 +1,4 @@
 require "jekyllposter/version"
-
-module Jekyllposter
-  # Your code goes here...
-end
+require "jekyllposter/common"
+require "jekyllposter/questions"
+require "jekyllposter/answers"

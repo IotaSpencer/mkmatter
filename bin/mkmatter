@@ -1,5 +1,30 @@
 #!/usr/bin/ruby
-
+require 'highline'
 require "jekyllposter/common"
 require "jekyllposter/questions"
 require "jekyllposter/answers"
+@questions = nil
+@answers = nil
+@hl = HighLine.new()
+
+def select_type
+  submission_type = @hl.choose do |menu|
+    menu.header = "Select Submission Type"
+    menu.choice :post
+    menu.choice :page
+    menu.choice :draft
+    menu.default = :post
+    menu.prompt = "? "
+  end
+  case submission_type
+  when :post
+    @answers = Answers.new(submission_type.to_s)
+    @questions = Questions::Post.new
+  when :page
+    @questions = Questions::Page.new
+  when :draft
+    @questions = Questions::Draft.new
+  end
+end
+
+select_type
