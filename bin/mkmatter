@@ -1,0 +1,5 @@
+#!/usr/bin/ruby
+
+require "jekyllposter/common"
+require "jekyllposter/questions"
+require "jekyllposter/answers"
