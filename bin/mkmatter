@@ -1,30 +1,46 @@
 #!/usr/bin/ruby
 require 'highline'
-require "jekyllposter/common"
-require "jekyllposter/questions"
-require "jekyllposter/answers"
-@questions = nil
+require 'jekyllposter/questions'
+require 'jekyllposter/answers'
+Signal.trap('INT') do
+  puts
+  puts "Got INT.. Exiting"
+  exit 0
+end
 @answers = nil
-@hl = HighLine.new()
+@hl      = HighLine.new
 
-def select_type
-  submission_type = @hl.choose do |menu|
-    menu.header = "Select Submission Type"
+def main
+  draft = @hl.agree "Is this a draft post/page? ", true
+  
+  layout = @hl.choose do |menu|
+    menu.header = "Layout"
     menu.choice :post
     menu.choice :page
-    menu.choice :draft
+    menu.prompt  = "? "
     menu.default = :post
-    menu.prompt = "? "
   end
-  case submission_type
-  when :post
-    @answers = Answers.new(submission_type.to_s)
-    @questions = Questions::Post.new
-  when :page
-    @questions = Questions::Page.new
-  when :draft
-    @questions = Questions::Draft.new
+  case layout
+    when :post
+      @answers = Jekyllposter::Questions::Post.new.ask
+    when :page
+      @answers = Jekyllposter::Questions::Page.new.ask
+  
   end
 end
 
-select_type
+loop do
+  main
+  do_loop = @hl.agree "Would you like to try again?", true
+  if do_loop
+    puts "Restarting!"
+  else
+    puts "Break out!"
+    exit 0
+    
+  end
+end
+
+at_exit do
+  puts "Exiting..."
+end
