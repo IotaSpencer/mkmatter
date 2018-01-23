@@ -75,13 +75,18 @@ module Jekyllposter
     # @param [HighLine] hl A highline context
     # @return [String]
     def get_file_format(hl)
-      file_format = hl.choose do |menu|
+      hl.choose do |menu|
         menu.header = 'Choose whether you want HTML or Markdown (md)'
         menu.choice 'html'
         menu.choice 'md'
         menu.prompt = '? '
       end
-      file_format
+    end
+    def get_keywords(hl)
+      hl.ask("Meta Keywords? (example: 'space 'spaced', comma separated, page keywords, goes here') ")
+    end
+    def get_description(hl)
+      hl.ask("Meta Description? (example: 'This page is a bunch of right nonsense.'")
     end
   end
 end

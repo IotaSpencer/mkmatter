@@ -32,6 +32,8 @@ module Jekyllposter
       @slug_date   = now.strftime('%Y-%m-%d')
       @published   = question_hash[:published]
       @file_format = question_hash[:file_format]
+      @keywords = question_hash[:keywords]
+      @description = question_hash[:description]
       @matter      = {
           layout:     @layout,
           title:      @title,
