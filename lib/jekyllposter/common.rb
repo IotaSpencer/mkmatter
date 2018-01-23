@@ -5,26 +5,31 @@ module Jekyllposter
   module Common
     attr_accessor :time_zone
     # @param [HighLine] hl A highline context
+    # @return [String]
     def get_title(hl)
       hl.ask 'Title: '
     end
     
     # @param [HighLine] hl A highline context
+    # @return [String]
     def get_tags(hl)
       hl.ask('Tags? (space separated list) ', -> (str) {str.split(' ')})
     end
     
     # @param [HighLine] hl A highline context
+    # @return [String]
     def get_categories(hl)
       hl.ask('Categories? (space separated list) ', -> (str) {str.split(' ')})
     end
     
     # @param [HighLine] hl A highline context
+    # @return [String]
     def get_published(hl)
       hl.agree('Do you want to publish this immediately? ', true)
     end
     
     # @param [HighLine] hl A highline context
+    # @return [String]
     def get_time_zone(hl)
       custom   = nil
       timezone = hl.choose do |m|
@@ -65,11 +70,10 @@ module Jekyllposter
       5.times do
         sleep(0.1); print '.'
       end
-      puts @time_zone.class
-      puts ''
     end
-
+    
     # @param [HighLine] hl A highline context
+    # @return [String]
     def get_file_format(hl)
       file_format = hl.choose do |menu|
         menu.header = 'Choose whether you want HTML or Markdown (md)'

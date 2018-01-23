@@ -31,12 +31,12 @@ Which will ask you questions about the post you want to put out.
 
 * If you want to make multiple scripts, the script automatically loops itself and resets its variables.
 
-* The script also will open an editor (the 'editor' command) if allowed to, as to allow the user to begin editing their file, frontmatter already included.
+* The script also will open an editor (the 'editor' command) if allowed to, as to allow the user to begin editing their file, front-matter already included.
 
 ## Contributing
 
-* [Bug Reports](/issues)
-* [Pull Requests](/pulls)
+* [Bug Reports](https://github.com/IotaSpencer/jekyllposter/issues)
+* [Pull Requests](https://github.com/IotaSpencer/jekyllposter/pulls)
 
 ## License
 

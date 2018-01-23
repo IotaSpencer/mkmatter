@@ -43,16 +43,20 @@ module Jekyllposter
       }
     end
     
+    # @return [Hash] returns attribute `.matter`
     def to_h
       @matter
     end
     
     # @param [Hash] hash other hash
+    # @return [nil] merges hash into attribute `.matter`
     def to_h=(hash)
       @matter.merge!(hash)
     end
     
     alias_method :inspect, :to_h
+    #
+    # Dumps all file applicable metadata to a provided output.
     # @param [String] path_or_file A path or filename
     # @param [Boolean] stdout Whether to print to stdout
     def dump(path_or_file, stdout = true)
