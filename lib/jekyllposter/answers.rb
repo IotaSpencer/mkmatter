@@ -68,7 +68,7 @@ module Jekyllposter
       if hl.agree('Do you want to add custom fields? (usable as {{LAYOUT_TYPE.FIELD}} in templates) ', true)
         hl.say('Your fields should be inputted as FIELD=>TEXT HERE')
         hl.say("Enter 'EOL' on a new line and press enter when you are done.")
-        hl.say("<% color('NOTE', :bold, :red) %>: Input is <% color('NOT', :bold, :red) %> evaluated!")
+        hl.say("<% HighLine.color('NOTE', :bold, :red) %>: Input is <% HighLine.color('NOT', :bold, :red) %> evaluated!")
         custom_fields = hl.ask('Fields?') do |q|
           q.gather = /^EOL$/
         end
