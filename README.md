@@ -28,7 +28,7 @@ or
 
 #### User
 
-```$ gem install --user-install ```
+```$ gem install --user-install jekyllposter```
 
 ## Usage
 
