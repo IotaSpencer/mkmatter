@@ -2,45 +2,127 @@
 require 'highline'
 require 'jekyllposter/questions'
 require 'jekyllposter/answers'
+require 'slugity/extend_string'
+require 'find'
 Signal.trap('INT') do
-  puts
-  puts "Got INT.. Exiting"
+  $stderr.puts
+  $stderr.puts 'Got INT.. Exiting'
   exit 0
 end
-@answers = nil
-@hl      = HighLine.new
+@questions = nil
+@hl        = HighLine.new($stdin, $stderr, 80)
+@answers   = nil
 
 def main
-  draft = @hl.agree "Is this a draft post/page? ", true
-  
+  draft  = @hl.agree 'Is this a draft post/page? ', true
   layout = @hl.choose do |menu|
-    menu.header = "Layout"
+    menu.header = 'Layout'
     menu.choice :post
     menu.choice :page
-    menu.prompt  = "? "
+    menu.prompt  = '? '
     menu.default = :post
   end
   case layout
     when :post
-      @answers = Jekyllposter::Questions::Post.new.ask
+      @questions = Jekyllposter::Questions::Post.new(@hl).ask
     when :page
-      @answers = Jekyllposter::Questions::Page.new.ask
+      @questions = Jekyllposter::Questions::Page.new(@hl).ask
+  end
+  @answers = Jekyllposter::Answers.new(draft, layout, @questions)
+  
+  @stdout = @hl.agree 'Would you like to output to stdout?', true
+
+
+end
+
+def put_in_folder
+  file_date  = @answers.slug_date
+  file_title = @answers.title.to_slug
+  file_ext   = @answers.file_format
+  case @answers.draft
+    when true
+      type_folder = '_drafts'
+    else
+      type_folder = "_#{@answers.layout}s"
+  end
+  unless @stdout
+    catch [:no_file, :not_writable, :restart] do
+      return unless @hl.agree('Would you like this script to write the file in the folder? ', true)
+      folder = nil
+      if @hl.agree("Is your jekyll folder somewhere inside the current working directory ( #{Dir.getwd} )? ", true)
+        folder      = @hl.ask('Select your folder (relative path) ', String)
+        path_folder = Pathname(folder)
+        throw :restart unless path_folder.relative?
+        
+        folder = path_folder
+      else
+        folder      = @hl.ask("What's the absolute path of your jekyll root? (make sure the user account has permissions) ", String)
+        path_folder = Pathname(folder)
+        throw :restart if path_folder.relative?
+        
+        folder = path_folder
+      
+      end
+      folder_path = nil
+      begin
+        folder_path = folder.realpath
+      rescue Errno::ENOENT
+        @hl.say("#{color('Error', :bold, :red)}: '#{folder}' does not exist.")
+        if @hl.agree('Try again? (exits otherwise)', true)
+          throw :no_file
+        else
+          $stderr.puts 'Exiting!'
+          exit 0
+        end
+      end
+      file      = @hl.ask("What file path? (accept '.' as default to use YYYY-MM-DD-#{@answers.title.to_slug}) ", String) do |q|
+        q.default = '.'
+      end
+      dir_path  = File.join(folder_path.expand_path.to_s, type_folder)
+      @file_path = File.join(folder_path.expand_path.to_s, type_folder, "#{file_date}-#{file_title}.#{file_ext}")
+      
+      case file
+        when '.'
+          if File.writable? dir_path
+            @answers.dump(@file_path, @stdout)
+          else
+            @hl.say "<% color('Error', :red, :bold) %>:#{dir_path} exists but is not writable!"
+            if @hl.agree('Continue? ', true)
+              @hl.say('Lets try again')
+              throw :not_writable
+            end
+          end
+        
+        else
+          @answers.dump(@file_path, @stdout)
+      end
+    end
+  end
+end
+
+def launch_editor
+  if @hl.agree('Would you like to open your system editor? ', true)
+    pid = spawn("editor #{@file_path}")
+    Process.wait pid
   
   end
 end
 
 loop do
-  main
-  do_loop = @hl.agree "Would you like to try again?", true
-  if do_loop
-    puts "Restarting!"
-  else
-    puts "Break out!"
-    exit 0
-    
+  catch :restart do
+    main
+    put_in_folder
+    launch_editor
+    puts "\e[H\e[2J"
   end
-end
+  do_loop = @hl.agree 'Would you like to try again? ', true
+  if do_loop
+    $stderr.puts 'Restarting!'
+    puts "\e[H\e[2J"
 
-at_exit do
-  puts "Exiting..."
+  else
+    $stderr.puts 'All Done!'
+    puts "\e[H\e[2J"
+    exit 0
+  end
 end
