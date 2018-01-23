@@ -1,9 +1,6 @@
 # Jekyllposter
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/jekyllposter`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
+Jekyllposter is a gem designed to make it easy to generate front matter for files and also subsequently edit them.
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,17 +19,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Using 'mkmatter'
 
-## Development
+If you want to use 'mkmatter', an executable that ships with `jekyllposter`, all you have to do is run it.
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```
+$ mkmatter
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Which will ask you questions about the post you want to put out.
+
+* If you want to make multiple scripts, the script automatically loops itself and resets its variables.
+
+* The script also will open an editor (the 'editor' command) if allowed to, as to allow the user to begin editing their file, frontmatter already included.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/jekyllposter.
+* [Bug Reports](/issues)
+* [Pull Requests](/pulls)
 
 ## License
 
