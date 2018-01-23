@@ -4,7 +4,7 @@
 
 Jekyllposter is a gem designed to make it easy to generate front matter for files and also subsequently edit them.
 
-There is a current TODO, I've absently made Jekyllposter::Questions::Page the same as ::Post which means pages aren't *allowed* to be a page in actuality, this will be fixed promptly.
+* Update: 1/23/18 -- I've differentiated them, and the latest versions should work correctly.
 
 ## Installation
 
