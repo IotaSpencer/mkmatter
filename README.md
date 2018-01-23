@@ -13,9 +13,9 @@ And then execute:
 
     $ bundle install
 
-## Installation
+### Standalone
 
-To install to the system/user, use the following
+To install to the system/user instead of a project, use the following
 
 #### System-wide
 As root or by using sudo, run:
