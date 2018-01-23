@@ -55,7 +55,7 @@ Which will ask you questions about the post you want to put out.
 
 ## Contact
 
-**E-mail**: ken@electrocode.net
+**E-mail**: [me@iotaspencer.me](mailto:me@iotaspencer.me)
 
 ## License
 
