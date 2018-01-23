@@ -1,5 +1,7 @@
 # Jekyllposter
 
+[![Gem Version](https://badge.fury.io/rb/jekyllposter.svg)](https://badge.fury.io/rb/jekyllposter)
+
 Jekyllposter is a gem designed to make it easy to generate front matter for files and also subsequently edit them.
 
 There is a current TODO, I've absently made Jekyllposter::Questions::Page the same as ::Post which means pages aren't *allowed* to be a page in actuality, this will be fixed promptly.
