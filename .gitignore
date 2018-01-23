@@ -10,3 +10,4 @@
 /.vscode/
 Gemfile.lock
 *.gem
+pkg/
