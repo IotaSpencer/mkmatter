@@ -1,6 +1,5 @@
 require 'highline'
 require 'jekyllposter/common'
-require 'jekyllposter/markdown'
 require 'ostruct'
 module Jekyllposter
   module Questions
