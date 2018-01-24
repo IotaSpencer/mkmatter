@@ -70,6 +70,7 @@ module Jekyllposter
       5.times do
         sleep(0.1); print '.'
       end
+      puts ''
     end
     
     # @param [HighLine] hl A highline context
