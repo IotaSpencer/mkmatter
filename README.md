@@ -1,6 +1,6 @@
 # Jekyllposter
 
-[![Gem Version](https://badge.fury.io/rb/jekyllposter.svg)](https://badge.fury.io/rb/jekyllposter)
+[![Gem Version](https://badge.fury.io/rb/mkmatter.svg)](https://badge.fury.io/rb/mkmatter)
 
 Jekyllposter is a gem designed to make it easy to generate front matter for files and also subsequently edit them.
 
@@ -11,7 +11,7 @@ Jekyllposter is a gem designed to make it easy to generate front matter for file
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'jekyllposter'
+gem 'mkmatter'
 ```
 
 And then execute:
@@ -25,21 +25,21 @@ To install to the system/user instead of a project, use the following
 #### System-wide
 As root or by using sudo, run:
 
-```$ gem install jekyllposter```
+```$ gem install mkmatter```
 
 or
 
-```$ sudo gem install jekyllposter```
+```$ sudo gem install mkmatter```
 
 #### User
 
-```$ gem install --user-install jekyllposter```
+```$ gem install --user-install mkmatter```
 
 ## Usage
 
 ### Using 'mkmatter'
 
-If you want to use 'mkmatter', an executable that ships with `jekyllposter`, all you have to do is run it.
+If you want to use 'mkmatter', an executable that ships with `mkmatter`, all you have to do is run it.
 
 ```
 $ mkmatter
@@ -55,8 +55,8 @@ Which will ask you questions about the post you want to put out.
 
 * I am open to the idea of adding more questions/modules if there are plugins that require more configuration in the front matter. Just let me know!
 
-* [Bug Reports](https://github.com/IotaSpencer/jekyllposter/issues)
-* [Pull Requests](https://github.com/IotaSpencer/jekyllposter/pulls)
+* [Bug Reports](https://github.com/IotaSpencer/mkmatter/issues)
+* [Pull Requests](https://github.com/IotaSpencer/mkmatter/pulls)
 
 ## Contact
 

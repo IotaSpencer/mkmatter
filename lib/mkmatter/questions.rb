@@ -1,11 +1,11 @@
 require 'highline'
-require 'jekyllposter/common'
+require 'mkmatter/common'
 require 'ostruct'
-module Jekyllposter
+module Mkmatter
   module Questions
 
     class Post
-      include Jekyllposter::Common
+      include Mkmatter::Common
 
       attr :answers
       attr :highline_context
@@ -28,7 +28,7 @@ module Jekyllposter
     end
 
     class Page
-      include Jekyllposter::Common
+      include Mkmatter::Common
       attr :answers
       attr :highline_context
       

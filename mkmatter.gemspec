@@ -1,28 +1,28 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'jekyllposter/version'
+require 'mkmatter/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'jekyllposter'
-  spec.version = Jekyllposter::VERSION
+  spec.name = 'mkmatter'
+  spec.version = Mkmatter::VERSION
   spec.authors = ['Ken Spencer']
-  spec.email = ['ken@electrocode.net']
+  spec.email = ['me@iotaspencer.me']
 
   spec.summary = %q{Script facilitating a easy use of Jekyll}
   spec.description = 'A HighLine script that prompts users through setting up a Jekyll page, post, or draft. '
-  spec.homepage = 'https://github.com/IotaSpencer/jekyllposter'
+  spec.homepage = 'https://github.com/IotaSpencer/mkmatter'
   spec.license = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   if spec.respond_to?(:metadata)
     spec.metadata = {
-        'github_repo'       => 'https://github.com/IotaSpencer/jekyllposter',
-        'bug_tracker_uri'   => 'https://github.com/IotaSpencer/jekyllposter/issues',
-        'documentation_uri' => 'https://rubygems.org/gems/jekyllposter',
-        'homepage_uri'      => 'https://iotaspencer.me/projects/jekyllposter',
-        'source_code_uri'   => 'https://github.com/IotaSpencer/jekyllposter',
-        'wiki_uri'          => 'https://github.com/IotaSpencer/jekyllposter'
+        'github_repo'       => 'https://github.com/IotaSpencer/mkmatter',
+        'bug_tracker_uri'   => 'https://github.com/IotaSpencer/mkmatter/issues',
+        'documentation_uri' => 'https://rubygems.org/gems/mkmatter',
+        'homepage_uri'      => 'https://iotaspencer.me/projects/mkmatter',
+        'source_code_uri'   => 'https://github.com/IotaSpencer/mkmatter',
+        'wiki_uri'          => 'https://github.com/IotaSpencer/mkmatter'
     }
   else
     raise 'RubyGems 2.0 or newer is required to protect against ' \
