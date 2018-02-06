@@ -1,7 +1,7 @@
 require 'yaml'
 require 'active_support/all'
 require 'highline'
-module Jekyllposter
+module Mkmatter
   class Answers
     attr_accessor :title, :tags, :categories
     attr_accessor :date, :layout, :draft

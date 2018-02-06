@@ -1,7 +1,7 @@
 require 'highline'
 require 'active_support/all'
 
-module Jekyllposter
+module Mkmatter
   module Common
     attr_accessor :time_zone
     # @param [HighLine] hl A highline context

@@ -1,9 +1,10 @@
 #!/usr/bin/ruby
-require 'commander/import'
+require 'commander'
 require 'mkmatter/questions'
 require 'mkmatter/answers'
 require 'slugity/extend_string'
 require 'find'
+require 'highline'
 Signal.trap('INT') do
   $stderr.puts
   $stderr.puts 'Got INT.. Exiting'

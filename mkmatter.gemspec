@@ -1,15 +1,14 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'mkmatter/version'
-
+require 'methods'
 Gem::Specification.new do |spec|
-  spec.name = 'mkmatter'
+  spec.name = Mkmatter::GEM_NAME
   spec.version = Mkmatter::VERSION
   spec.authors = ['Ken Spencer']
   spec.email = ['me@iotaspencer.me']
 
-  spec.summary = %q{Script facilitating a easy use of Jekyll}
-  spec.description = 'A HighLine script that prompts users through setting up a Jekyll page, post, or draft. '
+  spec.summary = Mkmatter::SUMMARY
+  spec.description = Mkmatter::DESC
   spec.homepage = 'https://iotaspencer.me/projects/mkmatter'
   spec.license = 'MIT'
 
