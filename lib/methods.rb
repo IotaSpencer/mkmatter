@@ -14,5 +14,5 @@ module Mkmatter
   
   #
   # Gem Version
-  VERSION = '1.2.11'
+  VERSION = '1.3.11'
 end
