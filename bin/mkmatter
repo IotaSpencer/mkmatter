@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-require 'highline'
+require 'commander/import'
 require 'mkmatter/questions'
 require 'mkmatter/answers'
 require 'slugity/extend_string'
