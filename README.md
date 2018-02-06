@@ -1,10 +1,14 @@
-# Jekyllposter
+# mkmatter
 
 [![Gem Version](https://badge.fury.io/rb/mkmatter.svg)](https://badge.fury.io/rb/mkmatter)
 
-Jekyllposter is a gem designed to make it easy to generate front matter for files and also subsequently edit them.
+## Contact
 
-* Update: 1/23/18 -- I've differentiated them, and the latest versions should work correctly.
+[e-mail](mailto:me@iotaspencer.me) /
+[My Website](https://iotaspencer.me) /
+[Project Page on IotaSpencer.me](https://iotaspencer.me/projects/mkmatter)
+
+'mkmatter' is a gem designed to make it easy to generate front matter for files and also subsequently edit them.
 
 ## Installation
 
@@ -58,9 +62,15 @@ Which will ask you questions about the post you want to put out.
 * [Bug Reports](https://github.com/IotaSpencer/mkmatter/issues)
 * [Pull Requests](https://github.com/IotaSpencer/mkmatter/pulls)
 
-## Contact
 
-**E-mail**: [me@iotaspencer.me](mailto:me@iotaspencer.me)
+
+<!--
+
+**Tutorial**: [mkmatter Tutorial on IotaSpencer.me](https://iotaspencer.me/)
+
+
+
+-->
 
 ## License
 

@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = %q{Script facilitating a easy use of Jekyll}
   spec.description = 'A HighLine script that prompts users through setting up a Jekyll page, post, or draft. '
-  spec.homepage = 'https://github.com/IotaSpencer/mkmatter'
+  spec.homepage = 'https://iotaspencer.me/projects/mkmatter'
   spec.license = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
