@@ -87,7 +87,7 @@ module Mkmatter
       hl.ask("Meta Keywords? (example: 'space 'spaced', comma separated, page keywords, goes here') ")
     end
     def get_description(hl)
-      hl.ask("Meta Description? (example: 'This page is a bunch of right nonsense.'")
+      hl.ask("Meta Description? (example: 'This page is a bunch of right nonsense.' ")
     end
   end
 end

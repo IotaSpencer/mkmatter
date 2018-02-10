@@ -1,21 +1,22 @@
-require 'commander'
-require 'mkmatter'
-class MyApplication
-  include Commander::Methods
+require 'thor'
+require 'mkmatter/cli/methods'
+require 'methods'
+require 'highline'
+
+class App < Thor
+  include Thor::Actions
+
+  map %w[--version -v] => :__print_version
+
+  desc '--version, -v', 'print the version'
+
+  def __print_version
+    puts Mkmatter::VERSION
+  end
   
-  def run
-    program :name, Mkmatter::__gem_name__
-    program :version, Mkmatter::VERSION
-    program :description, 'Stupid command that prints foo or bar.'
-    
-    command :foo do |c|
-      c.syntax      = 'foobar foo'
-      c.description = 'Displays foo'
-      c.action do |args, options|
-        say 'foo'
-      end
-    end
-    
-    run!
+  desc 'start', 'run mkmatter'
+  def start
+    app = Mkmatter::Methods
+    app.run
   end
 end
