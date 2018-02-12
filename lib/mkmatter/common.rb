@@ -24,12 +24,6 @@ module Mkmatter
     
     # @param [HighLine] hl A highline context
     # @return [String]
-    def get_published(hl)
-      hl.agree('Do you want to publish this immediately? ', true)
-    end
-    
-    # @param [HighLine] hl A highline context
-    # @return [String]
     def get_time_zone(hl)
       custom   = nil
       timezone = hl.choose do |m|
@@ -60,17 +54,6 @@ module Mkmatter
         end
         custom
       end
-    end
-    
-    # @param [HighLine] hl A highline context
-    def get_date(hl)
-      hl.say 'Getting Time & Date '
-      print '.'
-      sleep(0.1)
-      5.times do
-        sleep(0.1); print '.'
-      end
-      puts ''
     end
     
     # @param [HighLine] hl A highline context
