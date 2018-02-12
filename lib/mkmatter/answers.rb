@@ -9,19 +9,9 @@ module Mkmatter
     attr_accessor :published, :file_format
     attr_reader :matter
     
-    def initialize(submission_type, submission_layout, question_hash)
-      case submission_type
-        when :draft
-          @draft = true
-        else
-          @draft = false
-      end
-      case submission_layout
-        when :page
-          @layout = 'page'
-        when :post
-          @layout = 'post'
-      end
+    def initialize(question_hash, publish)
+      
+      @layout      = question_hash[:layout]
       @title       = question_hash[:title]
       @tags        = question_hash[:tags]
       @categories  = question_hash[:categories]
@@ -29,8 +19,7 @@ module Mkmatter
       now          = Time.zone.now
       @date        = now.to_s
       @slug_date   = now.strftime('%Y-%m-%d')
-      @slug_date   = now.strftime('%Y-%m-%d')
-      @published   = question_hash[:published]
+      @published   = publish
       @file_format = question_hash[:file_format]
       @keywords = question_hash[:keywords]
       @description = question_hash[:description]
@@ -40,9 +29,8 @@ module Mkmatter
           categories: @categories,
           tags:       @tags,
           date:       @date,
-          published:  @published,
-          draft:      @draft
       }
+      @matter[:published] = @published if publish
     end
     
     # @return [Hash] returns attribute `.matter`
@@ -59,9 +47,9 @@ module Mkmatter
     alias_method :inspect, :to_h
     #
     # Dumps all file applicable metadata to a provided output.
-    # @param [String] path_or_file A path or filename
+    # @param [Boolean] to_file A path or filename
     # @param [Boolean] stdout Whether to print to stdout
-    def dump(path_or_file, stdout = true)
+    def dump
       custom_fields = nil
       hl            = HighLine.new($stdin, $stderr, 80)
       # Custom matter
@@ -84,19 +72,8 @@ module Mkmatter
         hl.say('No extra fields were added.')
       else
       end
-      if path_or_file.nil?
-        raise ArgumentError
-      end
-      if path_or_file.is_a? String
-        path_or_file = File.expand_path(path_or_file)
-        File.open(path_or_file, 'a') do |fd|
-          fd.puts self.to_h.stringify_keys.to_yaml(indentation: 2)
-          fd.puts '---'
-        end
-      elsif path_or_file.is_a? FalseClass and stdout == true
-        puts self.to_h.stringify_keys.to_yaml(indentation: 2)
-        puts '---'
-      end
+      self.to_h.stringify_keys.to_yaml(indentation: 2)
+      '---'
     end
   end
 end
