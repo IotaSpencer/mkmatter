@@ -15,6 +15,8 @@ module Mkmatter
       def initialize(highline_context)
         @highline_context = highline_context
         @answers = OpenStruct.new
+        @answers[:layout] = 'post'
+        
       end
 
       # @return [OpenStruct]
@@ -36,13 +38,13 @@ module Mkmatter
       # @!visibility private
       def initialize(highline_context)
         @answers = OpenStruct.new
+        @answers[:layout] = 'page'
         @highline_context = highline_context
       end
       
       # @return [OpenStruct]
       def ask
         known_questions = self.methods.delete_if { |m| m.to_s !~ /^get_.*$/ }
-        known_questions.sort!
         known_questions.each do |m|
           @answers[m.to_s.gsub(/^get_/, '')] = self.method(m).call(@highline_context)
         end
