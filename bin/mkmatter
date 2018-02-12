@@ -10,4 +10,4 @@ Signal.trap('INT') do
   $stderr.puts 'Got INT.. Exiting'
   exit 0
 end
-App.start(ARGV)
+Mkmatter::App::CLI.start(ARGV)
