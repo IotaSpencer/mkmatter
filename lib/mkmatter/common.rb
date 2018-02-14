@@ -7,7 +7,12 @@ module Mkmatter
     # @param [HighLine] hl A highline context
     # @return [String]
     def get_title(hl)
-      hl.ask 'Title: '
+      title = hl.ask 'Title: '
+      if hl.agree("Would you like it 'titleized' (Title instead of title)?", true)
+        title.titleize
+      else
+        title
+      end
     end
     
     # @param [HighLine] hl A highline context
@@ -45,10 +50,10 @@ module Mkmatter
       if custom
         hl.say('Checking TimeZone Validity')
         print '.'
-        sleep(0.1)
+        sleep(0.05)
         5.times do
           print '.'
-          sleep(0.1)
+          sleep(0.05)
           puts ''
           TimeZone.find_tzinfo custom
         end
