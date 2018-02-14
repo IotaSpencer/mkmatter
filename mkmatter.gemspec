@@ -5,8 +5,7 @@ Gem::Specification.new do |spec|
   spec.name = Mkmatter::GEM_NAME
   spec.version = Mkmatter::VERSION
   spec.authors = ['Ken Spencer']
-  spec.email = ['me@iotaspencer.me']
-
+  spec.email = 'me@iotaspencer.me'
   spec.summary = Mkmatter::SUMMARY
   spec.description = Mkmatter::DESC
   spec.homepage = 'https://iotaspencer.me/projects/mkmatter'
@@ -41,6 +40,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'git', '~> 1.3'
   spec.add_runtime_dependency 'slugity', '~> 1.1'
   spec.add_runtime_dependency 'thor', '~> 0.20.0'
+  spec.add_runtime_dependency 'terminal-table', '~> 1.8'
+  spec.add_runtime_dependency 'os', '~> 1.0'
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'rake', '~> 10.0'
 end
