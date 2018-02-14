@@ -1,18 +1,31 @@
+require 'rubygems'
+require 'json'
+require 'yaml'
 module Mkmatter
-  #
-  # Gem Name
   GEM_NAME = 'mkmatter'
-  NAME = GEM_NAME
+  NAME     = GEM_NAME
   
   #
   # Gem Description
-  DESC = %q{A HighLine script that prompts users through setting up a Jekyll page, post, or draft.}
+  DESC = %q{A gem that prompts users through setting up a Jekyll page, post.}
   
   #
   # Gem Summary
-  SUMMARY = %q{Script facilitating a easy use of Jekyll}
+  SUMMARY = %q{Script facilitating easy content creation in Jekyll}
   
   #
   # Gem Version
   VERSION = '2.3.11'
+  class GemInfo
+    #
+    # Gem Name
+
+    
+    def initialize
+      @gem  = Gem::Specification.find_by_name(GEM_NAME)
+    end
+    def attrs
+      @gem
+    end
+  end
 end
