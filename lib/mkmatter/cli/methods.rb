@@ -4,12 +4,15 @@ module Mkmatter
     
     attr :file_path, :hl, :questions, :answers
     
-    def initialize(answers = nil)
+    def initialize(answers = nil, file_path = nil)
       @questions = nil
       @answers   = answers if answers != nil
       @hl        = HighLine.new($stdin, $stderr, 80)
+      @file_path = file_path
     end
-    
+    def Methods.get_jekyll_root
+      Pathname('.').realdirpath
+    end
     def check_if_jekyll
       cwd = Pathname.new('.')
       if cwd.join('index.html').exist?
@@ -29,27 +32,16 @@ module Mkmatter
     end
     
     def launch_editor
-      if @hl.agree("Would you like to open an editor? ('editor' command) ", true)
-        pid = spawn("editor #{@file_path}")
-        Process.wait pid
-      
-      end
-    end
-    
-    def and_again
-      again = @hl.agree 'Would you like to do another?', true
-      case again
-        when true
-          self.run
-        else
-          @hl.say 'Alright, Thanks!'
-          exit 0
+      if @file_path
+        if @hl.agree("Would you like to open an editor? ('editor' command) ", true)
+          pid = spawn("editor #{@file_path}")
+          Process.wait pid
+        end
       end
     end
     
     def Methods.run
       self.launch_editor
-      self.and_again
     end
   end
 end
