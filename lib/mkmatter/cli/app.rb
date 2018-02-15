@@ -1,14 +1,15 @@
 require 'thor'
-require 'mkmatter/cli/methods'
-require 'mkmatter/cli/descriptions'
-require 'mkmatter/questions'
-require 'methods'
 require 'highline'
 require 'slugity/extend_string'
 require 'yaml'
 require 'active_support/all'
 require 'terminal-table'
 require 'os'
+
+require 'mkmatter/cli/methods'
+require 'mkmatter/cli/descriptions'
+require 'mkmatter/questions'
+require 'methods'
 module Mkmatter
   module App
     class CLI < Thor
@@ -17,13 +18,14 @@ module Mkmatter
       map %w[--version -v] => :__print_version
       desc '--version, -v', 'Print the version'
       
+      # Prints version string
       def __print_version
         puts Mkmatter::VERSION
       end
       
       map %w[--debug -d] => :__debug
-      desc '--debug, -i', 'Prints debug info about the script/gem'
-      
+      desc '--debug, -d', 'Prints debug info about the script/gem'
+      # Prints debug info
       def __debug
         info   = Mkmatter::GemInfo.new
         report = YAML.safe_load(OS.report)
