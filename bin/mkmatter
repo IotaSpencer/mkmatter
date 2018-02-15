@@ -10,4 +10,7 @@ Signal.trap('INT') do
   $stderr.puts 'Got INT.. Exiting'
   exit 0
 end
+hl = HighLine.new($stdin, $stderr, 80)
 Mkmatter::App::CLI.start(ARGV)
+
+
