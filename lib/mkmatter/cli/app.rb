@@ -6,10 +6,10 @@ require 'active_support/all'
 require 'terminal-table'
 require 'os'
 
+require 'mkmatter'
 require 'mkmatter/cli/methods'
 require 'mkmatter/cli/descriptions'
 require 'mkmatter/questions'
-require 'methods'
 module Mkmatter
   module App
     class CLI < Thor
