@@ -15,7 +15,7 @@ module Mkmatter
   
   #
   # Gem Version
-  VERSION = '3.0.1'
+  VERSION = '3.0.2'
   class GemInfo
     #
     # Gem Name
