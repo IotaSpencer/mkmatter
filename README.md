@@ -61,12 +61,22 @@ with either `post` or `page
 ```
 $ mkmatter post
 $ mkmatter post --file
-# outputs the result to an applicable file,
-# including adding paths
 
-$ mkmatter post --publish --draft sets published: true and puts file into _drafts folder
+# outputs the result to an applicable file,
+# including adding paths as requested
+
+
+$ mkmatter post --file --publish --draft
+
+# sets published: true and puts file into
+# _drafts folder
+
+
 $ mkmatter post --no-publish # sets published: false
+
+
 $ mkmatter post --no-draft # has not been tested
+$ mkmatter post --draft --no-file # has not been tested
 ```
 ```text
 $ mkmatter page              # publish by default
