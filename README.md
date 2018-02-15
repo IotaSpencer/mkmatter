@@ -57,7 +57,7 @@ or
 
 If you want to use 'mkmatter', an executable that ships with `mkmatter`, you gots to run it
 
-with either `post` or `page
+with either `post` or `page`
 
 ```
 $ mkmatter post
