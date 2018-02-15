@@ -4,7 +4,7 @@ module Mkmatter
     def Methods.get_jekyll_root
       Pathname('.').realdirpath
     end
-    def check_if_jekyll
+    def Methods.check_if_jekyll
       hl = HighLine.new($stdin, $stderr, 80)
       cwd = Pathname.new('.')
       if cwd.join('index.html').exist?
@@ -23,7 +23,7 @@ module Mkmatter
       end
     end
     
-    def launch_editor(file_path)
+    def Methods.launch_editor(file_path)
       hl = HighLine.new($stdin, $stderr, 80)
       if file_path
         if hl.agree("Would you like to open an editor? ('editor' command) ", true)
