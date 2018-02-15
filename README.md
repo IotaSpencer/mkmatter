@@ -54,15 +54,28 @@ or
 
 ### Using 'mkmatter'
 
-If you want to use 'mkmatter', an executable that ships with `mkmatter`, all you have to do is run it.
+If you want to use 'mkmatter', an executable that ships with `mkmatter`, you gots to run it
+
+with either `post` or `page
 
 ```
-$ mkmatter
+$ mkmatter post
+$ mkmatter post --file
+# outputs the result to an applicable file,
+# including adding paths
+
+$ mkmatter post --publish --draft sets published: true and puts file into _drafts folder
+$ mkmatter post --no-publish # sets published: false
+$ mkmatter post --no-draft # has not been tested
+```
+```text
+$ mkmatter page              # publish by default
+$ mkmatter page --publish    # forces publishing
+$ mkmatter page --no-publish # sets published to false
 ```
 
-Which will ask you questions about the post you want to put out.
+Which will ask you questions about the content you want to put out.
 
-* If you want to make multiple files, the script automatically loops itself and resets its variables.
 
 * The script also will open an editor (the 'editor' command) if allowed to, as to allow the user to begin editing their file, front-matter already included.
 
@@ -73,14 +86,8 @@ Which will ask you questions about the post you want to put out.
 * [Bug Reports](https://github.com/IotaSpencer/mkmatter/issues)
 * [Pull Requests](https://github.com/IotaSpencer/mkmatter/pulls)
 
-
-
 <!--
-
-**Tutorial**: [mkmatter Tutorial on IotaSpencer.me](https://iotaspencer.me/)
-
-
-
+**Tutorial**: [mkmatter Tutorial on IotaSpencer.me](https://iotaspencer.me/2018-02-XX-mkmatter-tutorial)
 -->
 
 ## License
