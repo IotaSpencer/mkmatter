@@ -1,3 +1,3 @@
-require 'lib/mkmatter/cli/app'
-require 'lib/mkmatter/cli/descriptions'
-require 'lib/mkmatter/cli/methods'
+require 'mkmatter/cli/app'
+require 'mkmatter/cli/descriptions'
+require 'mkmatter/cli/methods'
