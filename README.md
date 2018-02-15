@@ -18,6 +18,7 @@
 [![E-mail](https://img.shields.io/badge/mkmatter%20on%20IotaSpencer%2eme-Project-green.svg?style=for-the-badge)](https://iotaspencer.me/projects/mkmatter)
 [![Twitter Follow](https://img.shields.io/twitter/follow/IotaEcode.svg?label=Follow%20Me%20on%20Twitter&style=for-the-badge)](https://twitter.com/IotaEcode)
 
+## About mkmatter
 
 'mkmatter' is a gem designed to make it easy to generate front matter for files and also subsequently edit them.
 
