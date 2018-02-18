@@ -9,6 +9,7 @@ require 'os'
 require 'mkmatter'
 require 'mkmatter/cli/methods'
 require 'mkmatter/cli/descriptions'
+require 'mkmatter/cli/subs'
 require 'mkmatter/questions'
 module Mkmatter
   module App
@@ -94,127 +95,12 @@ module Mkmatter
         end
       end
       
-      option :publish, :type => :boolean
-      option :file, :type => :boolean
-      desc 'page ...ARGS', 'make front matter (and possibly content) for a jekyll page'
-      long_desc Mkmatter::App::Descriptions::PAGE
-      def page
-        if Mkmatter::Methods.new.check_if_jekyll
-          @questions = Mkmatter::Questions::Page.new(HighLine.new($stdin, $stderr, 80)).ask
-          if options[:file]
-            answers  = Mkmatter::Answers.new(@questions, options.fetch(:publish, nil))
-            filename = answers.title.to_slug + '.' + answers.file_format.downcase
-            path     = Pathname("./#{filename}").realdirpath
-            if HILINE.agree('Would you like to put this page into a subdirectory?', true)
-              HILINE.say("What path? (directories will be created if they don't exist) ")
-              HILINE.say("Don't use a path starting with a slash, just put a relative path.")
-              HILINE.say('good => path/to/dir ‖ bad => /root/paths/are/bad/mmkay')
-              folder = HILINE.ask('? ') do |q|
-                q.confirm  = true
-                q.default  = '.'
-                q.validate = /^[^\/].*$/
-              end
-              folder = Pathname(folder)
-              begin
-                FileUtils.mkdir_p(File.join(Mkmatter::Methods.get_jekyll_root, folder))
-              rescue Errno::EEXIST
-                HILINE.say("<%= color('Error', :red, :bold) %>:Insufficient Permissions")
-                exit 1
-              end
-              path = Pathname(folder).realdirpath.join(filename)
-            end
-            File.open(path.to_path, 'a') do |fd|
-              fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
-              fd.puts '---'
-            end
-            Mkmatter::Methods.launch_editor
-          else
-            answers = Mkmatter::Answers.new(@questions, options.fetch(:publish, nil))
-            puts ''
-            puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
-            puts '---'
-          end
-        end
-      end
-
-
-      option :publish, :type => :boolean
-      option :file, :type => :boolean
-      option :draft, :type => :boolean
-      desc 'post ...ARGS', 'make front matter (and possibly content) for a jekyll post'
-      long_desc Mkmatter::App::Descriptions::POST
-      def post
-        if Mkmatter::Methods.check_if_jekyll
-          @questions = Mkmatter::Questions::Post.new(HighLine.new($stdin, $stderr, 80)).ask
-          if options[:draft] and options[:file]
-            answers     = Mkmatter::Answers.new(@questions, options[:publish])
-            file_folder = '_drafts'
-            filename    = [].concat([answers.slug_date, '-', answers.title.to_slug, '.', answers.file_format.downcase]).join
-            
-            path = Pathname("./#{file_folder}/#{filename}").realdirpath
-            if HILINE.agree('Would you like to put this page into a subdirectory?', true)
-              HILINE.say("What path? (directories will be created if they don't exist)")
-              HILINE.say("Don't use a path starting with a slash, just put a relative path.")
-              HILINE.say('<%= color(\'Good\', :green, :bold) %>: path/to/dir ‖ <%= color(\'Bad\', :red, :bold) %>: /root/paths/are/bad/mmkay')
-              folder = HILINE.ask('? ') do |q|
-                q.confirm  = true
-                q.default  = '.'
-                q.validate = /^[^\/].*$/
-              end
-              folder = Pathname(folder)
-              begin
-                FileUtils.mkdir_p(File.join(Mkmatter::Methods.get_jekyll_root, folder))
-              rescue Errno::EEXIST
-                HILINE.say("<%= color('Error', :red, :bold) %>:Insufficient Permissions")
-                exit 1
-              end
-              path = Pathname(folder).realdirpath.join(filename)
-            end
-            File.open(path.to_path, 'a') do |fd|
-              fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
-              fd.puts '---'
-            end
-            Mkmatter::Methods.launch_editor
-          elsif options[:file] and options[:draft].nil?
-            answers     = Mkmatter::Answers.new(@questions, options[:publish])
-            file_folder = '_posts'
-            filename    = [].concat([answers.slug_date, '-', answers.title.to_slug, '.', answers.file_format.downcase]).join('')
-            path        = Pathname("./#{file_folder}/#{filename}").realdirpath
-            if HILINE.agree('Would you like to put this post into a subdirectory?', true)
-              HILINE.say('What path?')
-              HILINE.say('----------------')
-              HILINE.say("Don't use a path starting with a slash, just put a relative path.")
-              HILINE.say("If you enter a path you don't like, you will have manually remove it if you confirm it.")
-              HILINE.say('<%= color(\'Good\', :green, :bold) %>: path/to/dir ‖ <%= color(\'Bad\', :red, :bold) %>: /root/paths/are/bad/mmkay')
-              folder = HILINE.ask('? ') do |q|
-                q.confirm  = true
-                q.default  = '.'
-                q.validate = /^[^\/].*$/
-              end
-              folder = Pathname("#{file_folder}/#{folder}")
-              begin
-                FileUtils.mkdir_p(File.join(Mkmatter::Methods.get_jekyll_root, folder))
-              rescue Errno::EEXIST
-                HILINE.say("<%= color('Error', :red, :bold) %>:Insufficient Permissions")
-                exit 1
-              end
-              path = Pathname(folder).realdirpath.join(filename)
-            end
-            File.open(path.to_path, 'a') do |fd|
-              fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
-              fd.puts '---'
-            end
-            
-            Mkmatter::Methods.launch_editor
-          elsif options[:draft].nil? and options[:file].nil?
-            answers = Mkmatter::Answers.new(@questions, options[:publish])
-            puts ''
-            puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
-            puts '---'
-            
-          end
-        end
-      end
+      desc 'new SUBCOMMAND [options]', 'Make new content'
+      subcommand 'new', Mkmatter::App::Classes::New
+      desc 'tags SUBCOMMAND [options]', 'Generate or Create tags'
+      subcommand 'tags', Mkmatter::App::Classes::Tags
     end
+      
+    
   end
 end

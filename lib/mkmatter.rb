@@ -14,11 +14,11 @@ module Mkmatter
   
   #
   # Gem Description
-  DESC = %q{A gem that prompts users through setting up a Jekyll page, post.}
+  DESC = %q{A gem helps a user maintain a jekyll site source directory.}
   
   #
   # Gem Summary
-  SUMMARY = %q{Script facilitating easy content creation in Jekyll}
+  SUMMARY = %q{Script facilitating easy content creation and generation for Jekyll Sites}
   
   #
   # Gem Version

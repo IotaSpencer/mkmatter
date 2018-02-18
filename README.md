@@ -22,6 +22,10 @@
 
 'mkmatter' is a gem designed to make it easy to generate front matter for files and also subsequently edit them.
 
+**Note**: Just like Jekyll there are minimal constraints on what is needed to build, but for `mkmatter` all I ask is that there is a `_config.yml` in your site source root, so the executable knows where it is in the filesystem.
+
+This is needed for any part that `reads from/writes to` the filesystem.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -57,37 +61,17 @@ or
 
 If you want to use 'mkmatter', an executable that ships with `mkmatter`, you gots to run it
 
-with either `post` or `page`
+**Note**: Due to minimal constraints in Jekyll, I require at least an empty `_config.yml` file at the root of your source directory. 
 
-```
-$ mkmatter post
-$ mkmatter post --file
+**P.S.**: **It does not have to have any directives, it can be an empty file.**
 
-# outputs the result to an applicable file,
-# including adding paths as requested
+#### Command 'new'
 
-
-$ mkmatter post --file --publish --draft
-
-# sets published: true and puts file into
-# _drafts folder
-
-
-$ mkmatter post --no-publish # sets published: false
-
-
-$ mkmatter post --no-draft # has not been tested
-$ mkmatter post --draft --no-file # has not been tested
-```
-```text
-$ mkmatter page              # publish by default
-$ mkmatter page --publish    # forces publishing
-$ mkmatter page --no-publish # sets published to false
-```
-
-Which will ask you questions about the content you want to put out.
-
-
+ 1. 'new' is for generating front matter and content
+ 
+ 1. The current commands under 'new' are 'post' and 'page'
+ 
+Which will ask you questions about the content you want to put out. 
 * The script also will open an editor (the 'editor' command) if allowed to, as to allow the user to begin editing their file, front-matter already included.
 
 ## Contributing

@@ -10,24 +10,4 @@ Signal.trap('INT') do
   $stderr.puts 'Got INT.. Exiting'
   exit 0
 end
-stop = 0
-while stop == 0
-  script = Mkmatter::App::CLI.new(ARGV)
-  args   = script.args
-  args.each do |arg|
-    if arg =~ /^(--info.*|--help|--debug|--version)/ # long options
-      Mkmatter::App::CLI.start(ARGV)
-      stop = 1
-    elsif arg =~ /^(-i|-h|-d|-v)/ # short options
-      Mkmatter::App::CLI.start(ARGV)
-      stop = 1
-    elsif arg =~ /^(help.*)/ # help commands
-      Mkmatter::App::CLI.start(ARGV)
-      stop = 1
-      
-    else
-      puts script.args
-      stop = 1
-    end
-  end
-end
+Mkmatter::App::CLI.start(ARGV)
