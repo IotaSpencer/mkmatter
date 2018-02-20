@@ -5,6 +5,7 @@ require 'yaml'
 require 'active_support/all'
 require 'terminal-table'
 require 'os'
+require 'rbconfig'
 
 require 'mkmatter'
 require 'mkmatter/cli/subs'
