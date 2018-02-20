@@ -7,10 +7,7 @@ require 'terminal-table'
 require 'os'
 
 require 'mkmatter'
-require 'mkmatter/cli/methods'
-require 'mkmatter/cli/descriptions'
-require 'mkmatter/cli/subs'
-require 'mkmatter/questions'
+
 module Mkmatter
   module App
     class CLI < Thor
@@ -31,9 +28,9 @@ module Mkmatter
         info   = Mkmatter::GemInfo.new
         report = YAML.safe_load(OS.report)
         rows   = {
-            'mkmatter_version' => info.attrs.version.to_s,
-            'rubygems_version' => info.attrs.rubygems_version,
-            'platform'         => info.attrs.platform
+            'mkmatter_version' => Mkmatter::VERSION,
+            'ruby_version' => RbConfig::RUBY_VERSION,
+            'platform'         => RbConfig::RUBY_PLATFORM
         }
         rows.merge! report
         rows.merge!({
@@ -62,13 +59,12 @@ module Mkmatter
       method_option :'info-format', :type => :string, desc: 'The format of info', enum: %w(table yaml), default: 'table'
       def __print_info
         format = options[:'info-format']
-        info   = Mkmatter::GemInfo.new
         rows   = {
-            'Author(s)':        info.attrs.authors.join(', '),
-            'E-Mail':           info.attrs.email,
-            'mkmatter-Version': info.attrs.version.to_s,
-            'RubyGems-Version': info.attrs.rubygems_version,
-            'Platform':         info.attrs.platform
+            'Author(s)':        Mkmatter::GemInfo.authors,
+            'E-Mail':           Mkmatter::GemInfo.email,
+            'mkmatter-Version': Mkmatter::VERSION,
+            'RubyGems-Version': RbConfig::RUBY_VERSION,
+            'Platform':         RbConfig::RUBY_PLATFORM
         }
         case format
           when 'table'

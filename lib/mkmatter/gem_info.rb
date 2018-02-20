@@ -1,3 +1,4 @@
+require 'mkmatter/version'
 module Mkmatter
   GEM_NAME = 'mkmatter'
   NAME     = GEM_NAME
@@ -9,5 +10,13 @@ module Mkmatter
   #
   # Gem Summary
   SUMMARY = %q{Script facilitating easy content creation and generation for Jekyll Sites}
-
+  class GemInfo
+    def self.authors
+      ['Ken Spencer']
+    end
+    
+    def self.email
+      'me@iotaspencer.me'
+    end
+  end
 end
