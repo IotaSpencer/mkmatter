@@ -33,6 +33,11 @@ jobs:
     script:
     - echo "Running tests against $(ruby -v) ..."
     - bundle exec rake -t
+  - stage: test Ruby Head
+    rvm: ruby-head
+    script:
+    - echo "Running tests against $(ruby -v) ..."
+    - bundle exec rake -t
   - stage: gem release
     rvm: 2.3.0
     script: echo "Deploying to rubygems.org ..."
