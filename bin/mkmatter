@@ -1,7 +1,5 @@
 #!/usr/bin/ruby
 require 'mkmatter'
-
-
 Signal.trap('INT') do
   $stderr.puts
   $stderr.puts 'Got INT.. Exiting'
