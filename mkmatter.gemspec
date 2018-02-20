@@ -1,6 +1,7 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'mkmatter'
+require 'mkmatter/version'
+require 'mkmatter/gem_info'
 Gem::Specification.new do |spec|
   spec.name = Mkmatter::GEM_NAME
   spec.version = Mkmatter::VERSION
@@ -17,10 +18,10 @@ Gem::Specification.new do |spec|
     spec.metadata = {
         'github_repo'       => 'https://github.com/IotaSpencer/mkmatter',
         'bug_tracker_uri'   => 'https://github.com/IotaSpencer/mkmatter/issues',
-        'documentation_uri' => 'https://rubygems.org/gems/mkmatter',
+        'documentation_uri' => 'https://rubydoc.info/gems/mkmatter',
         'homepage_uri'      => 'https://iotaspencer.me/projects/mkmatter',
         'source_code_uri'   => 'https://github.com/IotaSpencer/mkmatter',
-        'wiki_uri'          => 'https://github.com/IotaSpencer/mkmatter'
+        'wiki_uri'          => 'https://github.com/IotaSpencer/mkmatter/wiki'
     }
   else
     raise 'RubyGems 2.0 or newer is required to protect against ' \
@@ -44,9 +45,10 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'os', '~> 1.0'
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.7.0'
-  spec.add_development_dependency 'rspec-core', '~> 3.7.0'
-  spec.add_development_dependency 'rspec-mocks', '~> 3.7.0'
-  spec.add_development_dependency 'rspec-expectations', '~> 3.7.0'
-  spec.add_development_dependency 'rspec-support', '~> 3.7.0'
+  spec.add_development_dependency 'rspec', '~> 3.7', '>= 3.7.0'
+  spec.add_development_dependency 'rspec-core', '~> 3.7', '>= 3.7.0'
+  spec.add_development_dependency 'rspec-mocks', '~> 3.7', '>= 3.7.0'
+  spec.add_development_dependency 'rspec-expectations', '~> 3.7', '>= 3.7.0'
+  spec.add_development_dependency 'rspec-support', '~> 3.7', '>= 3.7.0'
+
 end
