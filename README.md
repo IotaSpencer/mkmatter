@@ -1,4 +1,8 @@
 # mkmatter
+
+[![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/dev.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
+[![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/master.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
+
 [![forthebadge](https://forthebadge.com/images/badges/uses-badges.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com)
