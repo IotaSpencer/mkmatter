@@ -1,5 +1,5 @@
 require 'rspec'
-require 'mkmatter'
+require 'mkmatter/cli/app'
 require 'custom_formatter'
 
 RSpec.configure do |config|

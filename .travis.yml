@@ -1,5 +1,6 @@
 language: ruby
 script: echo "Running tests against $(ruby -v) ..."
+bundler_args: binstubs --standalone
 notifications:
   irc:
     channels:
@@ -11,29 +12,25 @@ notifications:
 jobs:
   include:
   - stage: test Ruby2.2
-    bundler_args: --binstubs
     rvm: 2.2.2
     script:
     - echo "Running tests against $(ruby -v) ..."
-    - bundle exec rake
+    - rake
   - stage: test Ruby2.3
-    bundler_args: --binstubs
     rvm: 2.3.0
     script:
     - echo "Running tests against $(ruby -v) ..."
-    - bundle exec rake
+    - rake
   - stage: test Ruby2.4
-    bundler_args: --binstubs
     rvm: 2.4.0
     script:
     - echo "Running tests against $(ruby -v) ..."
-    - bundle exec rake
+    - rake
   - stage: test Ruby2.5
-    bundler_args: --binstubs
     rvm: 2.5.0
     script:
     - echo "Running tests against $(ruby -v) ..."
-    - bundle exec rake
+    - rake
   - stage: gem release
     rvm: 2.3.0
     script: echo "Deploying to rubygems.org ..."

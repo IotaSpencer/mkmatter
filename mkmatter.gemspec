@@ -49,6 +49,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec-core', '~> 3.7', '>= 3.7.0'
   spec.add_development_dependency 'rspec-mocks', '~> 3.7', '>= 3.7.0'
   spec.add_development_dependency 'rspec-expectations', '~> 3.7', '>= 3.7.0'
-  spec.add_development_dependency 'rspec-support', '~> 3.7', '>= 3.7.0'
 
 end
