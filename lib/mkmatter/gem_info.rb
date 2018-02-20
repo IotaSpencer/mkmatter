@@ -11,11 +11,11 @@ module Mkmatter
   # Gem Summary
   SUMMARY = %q{Script facilitating easy content creation and generation for Jekyll Sites}
   class GemInfo
-    def self.authors
+    def GemInfo.authors
       ['Ken Spencer']
     end
     
-    def self.email
+    def GemInfo.email
       'me@iotaspencer.me'
     end
   end
