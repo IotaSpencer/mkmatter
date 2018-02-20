@@ -47,8 +47,7 @@ module Mkmatter
     alias_method :inspect, :to_h
     #
     # Dumps all file applicable metadata to a provided output.
-    # @param [Boolean] to_file A path or filename
-    # @param [Boolean] stdout Whether to print to stdout
+    # @return [String] yaml front matter
     def dump
       custom_fields = nil
       hl            = HighLine.new($stdin, $stderr, 80)
