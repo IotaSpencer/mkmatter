@@ -1,10 +1,17 @@
 # mkmatter
 
-###### Builds & Links
+ Builds & Links
+
+<div>
+
 [![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/dev.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
 [![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/master.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
+</div>
+<div class="m-0 p-0">
+
 [![Github commits (since latest release)](https://img.shields.io/github/commits-since/IotaSpencer/mkmatter/latest.svg?style=for-the-badge)]()
-[![GitHub commits](https://img.shields.io/github/commits-since/IotaSpencer/mkmatter/3.0.27.svg?style=for-the-badge)]()
+[![GitHub commits](https://img.shields.io/github/commits-since/IotaSpencer/mkmatter/3.0.38.svg?style=for-the-badge)]()
+</div>
 
 ###### Gem
 [![Gem](https://img.shields.io/gem/v/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
