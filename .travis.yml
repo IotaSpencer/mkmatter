@@ -11,21 +11,25 @@ notifications:
 jobs:
   include:
   - stage: test Ruby2.2
+    bundler_args: --binstubs
     rvm: 2.2.2
     script:
     - echo "Running tests against $(ruby -v) ..."
     - rake
   - stage: test Ruby2.3
+    bundler_args: --binstubs
     rvm: 2.3.0
     script:
     - echo "Running tests against $(ruby -v) ..."
     - rake
   - stage: test Ruby2.4
+    bundler_args: --binstubs
     rvm: 2.4.0
     script:
     - echo "Running tests against $(ruby -v) ..."
     - rake
   - stage: test Ruby2.5
+    bundler_args: --binstubs
     rvm: 2.5.0
     script:
     - echo "Running tests against $(ruby -v) ..."
