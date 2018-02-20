@@ -1,6 +1,8 @@
 language: ruby
 script: echo "Running tests against $(ruby -v) ..."
-bundler_args: binstubs --standalone
+bundler_args: --jobs=3 --retry=3
+after_install:
+- bundle binstubs --standalone
 notifications:
   irc:
     channels:
