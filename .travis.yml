@@ -10,13 +10,30 @@ notifications:
     - 'Build details : %{build_url}'
 jobs:
   include:
-  - stage: test
+  - stage: test Ruby2.2
     rvm:
-      - 2.2.2
-      - 2.3.0
-      - 2.4.0
-      - 2.5.0
-    script: rake
+    - 2.2.2
+    script:
+    - echo "Running tests against $(ruby -v) ..."
+    - rake
+  - stage: test Ruby2.3
+    rvm:
+    - 2.3.0
+    script:
+    - echo "Running tests against $(ruby -v) ..."
+    - rake
+  - stage: test Ruby2.4
+    rvm:
+    - 2.4.0
+    script:
+    - echo "Running tests against $(ruby -v) ..."
+    - rake
+  - stage: test Ruby2.5
+    rvm:
+    - 2.5.0
+    script:
+    - echo "Running tests against $(ruby -v) ..."
+    - rake
   - stage: gem release
     rvm: 2.2
     script: echo "Deploying to rubygems.org ..."
