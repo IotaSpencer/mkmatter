@@ -1,8 +1,31 @@
-
 language: ruby
-rvm:
-  - 2.2.2
-  - 2.3.0
-  - 2.4.0
-  - 2.5.0
-script:
+script: echo "Running tests against $(ruby -v) ..."
+notifications:
+  irc:
+    channels:
+    - ircs://irc.electrocode.net:6697/#commits
+    template:
+    - "%{repository_slug}#%{build_number} (%{branch} - %{commit}) %{author}): %{message}"
+    - 'Change view : %{compare_url}'
+    - 'Build details : %{build_url}'
+jobs:
+  include:
+  - stage: test
+    rvm:
+      - 2.2.2
+      - 2.3.0
+      - 2.4.0
+      - 2.5.0
+    script: rake
+  - stage: gem release
+    rvm: 2.2
+    script: echo "Deploying to rubygems.org ..."
+    deploy:
+      provider: rubygems
+      api_key:
+        secure: BJd+CDvEsqGIB04QiLTr/+xZp9BzhyIZTcAfMWc84SE88jM/PgvklIujWgFTL7ZU1perK38t6PUdWUkiNzSfrIidfzFeRgQRGY9jN2hnxf9isHtkS2Dz75xMCBGaLlC8FmRd/CdftepG8Hd5VzUYCcwbKDOtDnHINhJWQ4RV6m0csf4qkK2vmJXhbuvblsLMwpk5NqNWhf2boQp6URuy7kbIvmGlfqDLULhQpv0ScgRmcogMePeOOGgLB5kWuRwMZUy5jIrhtumd6w1G0E93eqU7P28CL/usQvd+aOygyYJ02lR6cgzhcWd2ldtCCctqjazobQhz8lwqr7m+DHx+Px2JkwBw+XUAkceIuFl+As29/5PSULTmU2+DjjH1QXUXCa566lu8wCN6ZaJIGfgiV1BQzapomCDq8xviNIVKqeWDZ6zL4axAJ22VWfck2m3T4ZPon5qf8+uX1/pGJF6LI7S243Ee52G6GPjPzw1EgsVojliYAjoLIRM6vusLJo0NZzy7BrPUYtNd3KeTdaJE5J7hBhLHrkaZ64RC1Gt2pCT9uLQVv9+oezycS5AdNSeT1C+D//4/XbkhjrppLZBc9f8PC9o5HYHkwvCWdQLv61/3bhZTSCJ4K9H7lfmF58z9E7/891NGeMrJWeTsFsTX60StwooHmRKAy1duUL6SDL4=
+      gem: mkmatter
+      on:
+        tags: true
+        repo: IotaSpencer/mkmatter
+        branch: master
