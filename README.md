@@ -1,17 +1,22 @@
 # mkmatter
 
+###### Builds & Links
 [![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/dev.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
 [![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/master.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
 
+[![Gem](https://img.shields.io/gem/v/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
+[![GitHub tag](https://img.shields.io/github/tag/IotaSpencer/mkmatter.svg?style=for-the-badge)](https://github.com/IotaSpencer/mkmatter/tree/v3.0.1)
+
+[![Gem](https://img.shields.io/gem/dt/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
+[![Gem](https://img.shields.io/gem/dtv/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
+[![Gem](https://img.shields.io/gem/dv/mkmatter/3.0.25.svg?style=for-the-badge)](https://github.com/IotaSpencer/mkmatter/tree/v3.0.1)
+
+###### Badges
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![forthebadge](https://forthebadge.com/images/badges/uses-badges.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com)
-[![Gem](https://img.shields.io/gem/v/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
-[![Gem](https://img.shields.io/gem/dt/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
-[![Gem](https://img.shields.io/gem/dtv/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
-[![GitHub tag](https://img.shields.io/github/tag/IotaSpencer/mkmatter.svg?style=for-the-badge)](https://github.com/IotaSpencer/mkmatter/tree/v3.0.1)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Gem](https://img.shields.io/gem/dv/mkmatter/3.0.1.svg?style=for-the-badge)](https://github.com/IotaSpencer/mkmatter/tree/v3.0.1)
 
 
 
