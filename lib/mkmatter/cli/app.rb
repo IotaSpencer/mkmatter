@@ -45,7 +45,7 @@ module Mkmatter
                         'under bsd'     => OS::Underlying.bsd?
                     })
         table                  = Terminal::Table.new
-        table.style.width      = 60
+        table.style.width      = 80
         table.style.border_top = false
         table.title            = 'mkmatter Debug Info'
         table.rows             = rows.to_a
