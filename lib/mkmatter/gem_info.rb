@@ -9,7 +9,5 @@ module Mkmatter
   #
   # Gem Summary
   SUMMARY = %q{Script facilitating easy content creation and generation for Jekyll Sites}
-  
-  #
-  # Gem Version
+
 end
