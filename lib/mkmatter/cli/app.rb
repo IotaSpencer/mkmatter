@@ -9,6 +9,7 @@ require 'rbconfig'
 
 require 'mkmatter'
 require 'mkmatter/cli/subs'
+require 'mkmatter/gem_info'
 module Mkmatter
   module App
     class CLI < Thor
@@ -42,16 +43,12 @@ module Mkmatter
                         'under bsd'     => OS::Underlying.bsd?
                     })
         table                  = Terminal::Table.new
-        table.style.width      = 80
-        table.style.border_top = false
         table.title            = 'mkmatter Debug Info'
         table.rows             = rows.to_a
         table.align_column(0, :left)
-        width = table.style.width - 2
-        print '+', '-' * width, '+'
-        puts
+
         puts table
-        puts
+
       end
       
       map %w[--info -i] => :__print_info
@@ -60,26 +57,22 @@ module Mkmatter
       def __print_info
         format = options[:'info-format']
         rows   = {
-            'Author(s)':        Mkmatter::GemInfo.authors,
-            'E-Mail':           Mkmatter::GemInfo.email,
-            'mkmatter-Version': Mkmatter::VERSION,
-            'RubyGems-Version': RbConfig::CONFIG['RUBY_PROGRAM_VERSION'],
+            'author(s)':        Mkmatter::GemInfo.authors.join(', '),
+            'e-mail':           Mkmatter::GemInfo.email,
+            'mkmatter version': Mkmatter::VERSION,
+            'Ruby version': RbConfig::CONFIG['RUBY_PROGRAM_VERSION'],
             'Platform':         RbConfig::CONFIG['build_os']
         }
         case format
           when 'table'
             table                  = Terminal::Table.new
-            table.style.width      = 60
-            table.style.border_top = false
             table.style.alignment  = :center
             table.title            = 'mkmatter Info'
             table.rows             = rows.to_a
             table.align_column(0, :left)
-            width = table.style.width - 2
-            print '+', '-' * width, '+'
-            puts
+
             puts table
-            puts
+
           when 'yaml'
             puts rows.stringify_keys.to_yaml
           
