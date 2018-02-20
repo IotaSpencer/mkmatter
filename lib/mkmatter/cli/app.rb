@@ -7,7 +7,7 @@ require 'terminal-table'
 require 'os'
 
 require 'mkmatter'
-
+require 'mkmatter/cli/subs'
 module Mkmatter
   module App
     class CLI < Thor
