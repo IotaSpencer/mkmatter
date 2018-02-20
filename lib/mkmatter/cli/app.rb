@@ -30,8 +30,7 @@ module Mkmatter
         report = YAML.safe_load(OS.report)
         rows   = {
             'mkmatter_version' => Mkmatter::VERSION,
-            'ruby_version' => RbConfig::CONFIG['ruby_version'],
-            'platform'         => RbConfig::CONFIG['platform']
+            'ruby_version' => RbConfig::CONFIG['RUBY_PROGRAM_VERSION'],
         }
         rows.merge! report
         rows.merge!({
@@ -64,7 +63,7 @@ module Mkmatter
             'Author(s)':        Mkmatter::GemInfo.authors,
             'E-Mail':           Mkmatter::GemInfo.email,
             'mkmatter-Version': Mkmatter::VERSION,
-            'RubyGems-Version': RbConfig::CONFIG::RUBY_VERSION,
+            'RubyGems-Version': RbConfig::CONFIG['RUBY_PROGRAM_VERSION'],
             'Platform':         RbConfig::CONFIG['build_os']
         }
         case format
