@@ -13,6 +13,8 @@ notifications:
     skip_join: true
 jobs:
   include:
+  allow_failures:
+    - rvm: ruby-head
   - stage: test Ruby2.2
     rvm: 2.2.2
     script:
@@ -35,6 +37,7 @@ jobs:
     - bundle exec rake -t
   - stage: test Ruby Head
     rvm: ruby-head
+
     script:
     - echo "Running tests against $(ruby -v) ..."
     - bundle exec rake -t
