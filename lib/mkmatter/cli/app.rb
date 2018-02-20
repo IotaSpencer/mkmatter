@@ -92,7 +92,7 @@ module Mkmatter
       end
       
       desc 'new SUBCOMMAND [options]', 'Make new content'
-      subcommand 'new', Mkmatter::App::Classes::New
+      subcommand 'new', Mkmatter::App::Classes::NewContent
       desc 'tags SUBCOMMAND [options]', 'Generate or Create tags'
       subcommand 'tags', Mkmatter::App::Classes::Tags
     end

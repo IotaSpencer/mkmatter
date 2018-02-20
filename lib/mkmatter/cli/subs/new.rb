@@ -8,7 +8,7 @@ module Mkmatter
   module App
     module Classes
       # Generate 'New' Content
-      class New < Thor
+      class NewContent < Thor
         include Thor::Actions
         HILINE = HighLine.new($stdin, $stderr, 80)
         option :publish, :type => :boolean
