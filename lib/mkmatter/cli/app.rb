@@ -14,6 +14,8 @@ module Mkmatter
   module App
     class CLI < Thor
       include Thor::Actions
+      
+      # \(see {http://www.rubydoc.info/gems/highline/HighLine#initialize-instance_method HighLine#new}\)
       HILINE = HighLine.new($stdin, $stderr, 80)
       map %w[--version -v] => :__print_version
       desc '--version, -v', 'Print the version'
@@ -54,11 +56,12 @@ module Mkmatter
       map %w[--info -i] => :__print_info
       desc '--info, -i', 'Print script/gem info'
       method_option :'info-format', :type => :string, desc: 'The format of info', enum: %w(table yaml), default: 'table'
+      # @return nil
       def __print_info
         format = options[:'info-format']
         rows   = {
             'author(s)':        Mkmatter::GemInfo.authors.join(', '),
-            'e-mail':           Mkmatter::GemInfo.email,
+            'e-mail':           Mkmatter::GemInfo.email.join(', '),
             'mkmatter version': Mkmatter::VERSION,
             'Ruby version': RbConfig::CONFIG['RUBY_PROGRAM_VERSION'],
             'Platform':         RbConfig::CONFIG['build_os']

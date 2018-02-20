@@ -3,6 +3,7 @@ require 'find'
 require 'yaml'
 module Mkmatter
     class Methods
+      # @return [Boolean] whether current directory is inside a jekyll site source directory
       def Methods.check_if_jekyll
         cwd = Pathname.new('.')
         cwd.ascend do |path|
@@ -15,6 +16,7 @@ module Mkmatter
         end
       end
       
+      # @return [Pathname] path of current jekyll site source roo
       def Methods.get_jekyll_root
         if Methods.check_if_jekyll
           cwd = Pathname.new('.').realdirpath
@@ -28,6 +30,7 @@ module Mkmatter
         end
       end
       
+      # @return [NilClass] nil
       def Methods.launch_editor(file_path)
         hl = HighLine.new($stdin, $stderr, 80)
         if file_path
@@ -38,7 +41,9 @@ module Mkmatter
         end
       end
       
-      
+      # @param [String] type type of content
+      # @param [String] key root yaml directive to return
+      # @return [Hash] front matter
       def Methods.find_front_matter(type, key)
         unless type =~ /^(post|page)$/
           $stderr.puts "#{HighLine.color('Error', :red, :bold)}: Invalid Argument, allowed values: post, page"
