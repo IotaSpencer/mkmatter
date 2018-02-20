@@ -1,4 +1,3 @@
-require 'rubygems'
 module Mkmatter
   GEM_NAME = 'mkmatter'
   NAME     = GEM_NAME
@@ -13,18 +12,4 @@ module Mkmatter
   
   #
   # Gem Version
-  
-  class GemInfo
-    #
-    # Gem Name
-    
-    
-    def initialize
-      @gem = Gem::Specification.find_by_name(GEM_NAME)
-    end
-    
-    def attrs
-      @gem
-    end
-  end
 end
