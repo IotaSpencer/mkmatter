@@ -14,7 +14,7 @@ module Mkmatter
       
         PAGEDOC
         
-        POST = <<~POSTDOC
+        POST = <<-POSTDOC
           `mkmatter new post` will run you through making a jekyll post.
 
           Given the above options/flags you can modify how the script
