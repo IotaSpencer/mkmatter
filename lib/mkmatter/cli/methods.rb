@@ -1,6 +1,6 @@
 require 'highline'
 require 'find'
-
+require 'yaml'
 module Mkmatter
     class Methods
       def Methods.check_if_jekyll
@@ -41,7 +41,8 @@ module Mkmatter
       
       def Methods.find_front_matter(type, key)
         unless type =~ /^(post|page)$/
-          raise ArgumentError
+          $stderr.puts "#{HighLine.color('Error', :red, :bold)}: Invalid Argument, allowed values: post, page"
+          exit 1
         end
         yaml_loader       = ->(string) {YAML.load(string)}
         files             = {}
@@ -71,7 +72,7 @@ module Mkmatter
         files['md']   = md_front_matter
         files.each do |ftype, array|
           array.each do |ele|
-            front_matter[ele] = FrontMatterParser::Parser.parse_file(ele, syntax_parser: :md, loader: yaml_loader)[key]
+            front_matter[ele] = YAML.load_file(ele)[key]
           end
         end
         front_matter.select! {|k, v| !v.nil?}

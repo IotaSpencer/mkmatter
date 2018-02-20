@@ -42,7 +42,7 @@ module Mkmatter
         option(:'tag-index', type: :string, default: nil, desc: "configures whether generation of tag files will give them a layout file for a tag index, if you don't want generation to give layouts, omit --tag-index", aliases: %w(-i))
         def gen # only used for posts
           if Mkmatter::Tags.has_tag_folder?
-            front_matter = Mkmatter::Methods.find_front_matter(type, 'tags')
+            front_matter = Mkmatter::Methods.find_front_matter('post', 'tags')
             tags         = []
             front_matter.each do |key, value|
               tags << value

@@ -1,13 +1,10 @@
 #!/usr/bin/ruby
-require 'mkmatter/questions'
-require 'mkmatter/answers'
-require 'slugity/extend_string'
-require 'find'
-require 'highline'
-require 'mkmatter/cli/app'
+require 'mkmatter'
+
+
 Signal.trap('INT') do
   $stderr.puts
   $stderr.puts 'Got INT.. Exiting'
   exit 0
 end
-Mkmatter::App::CLI.start(ARGV)
+Mkmatter::App::Runner.new(ARGV.dup).execute!
