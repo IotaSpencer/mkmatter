@@ -1,6 +1,5 @@
 require 'rspec'
 
-require 'highline'
 class CustomFormatter
   RSpec::Core::Formatters.register self, :dump_pending, :dump_failures, :close,
                                    :dump_summary, :example_passed, :example_failed, :example_pending, :start, :example_group_started

@@ -11,9 +11,9 @@ module Mkmatter
         Given the above options/flags you can modify how the script
 
         outputs your front matter, or whether to mark it as published.
-      
+
         PAGEDOC
-        
+
         POST = <<-POSTDOC
           `mkmatter new post` will run you through making a jekyll post.
 
@@ -30,13 +30,15 @@ module Mkmatter
 
             the front matter. So if you omit `--publish` you will publish,
 
-            so you have to explicitly use --no-publish to set `#{HighLine.color('published', :yellow)}: #{HighLine.color('false', :yellow, :bold)}`
+            so you have to explicitly use --no-publish to set `<%= HighLine.color('published', :yellow) %>:
+             <%= HighLine.color('false', :yellow, :bold) %>`
 
         POSTDOC
       end
+
       module Tags
         GEN = <<-GENDOC
-        
+
         GENDOC
       end
     end

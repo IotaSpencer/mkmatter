@@ -1,10 +1,3 @@
-require 'rspec'
+require 'minitest/spec'
+require 'minitest/autorun'
 require 'mkmatter/cli/app'
-require 'custom_formatter'
-
-RSpec.configure do |config|
-  config.color      = true
-  config.formatter = CustomFormatter
-
-
-end

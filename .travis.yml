@@ -13,6 +13,7 @@ notifications:
     skip_join: true
 jobs:
   include:
+
   - stage: test Ruby2.2
     rvm: 2.2.2
     script:

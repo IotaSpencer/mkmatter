@@ -14,7 +14,7 @@ module Mkmatter
         option :publish, :type => :boolean
         option :file, :type => :boolean
         desc 'page [options]', 'make front matter (and possibly content) for a jekyll page'
-        long_desc Mkmatter::App::Descriptions::New::PAGE
+        long_desc ERB.new(Mkmatter::App::Descriptions::New::PAGE).result
     
         def page
           if options[:file]
@@ -64,7 +64,7 @@ module Mkmatter
         option :file, :type => :boolean
         option :draft, :type => :boolean
         desc 'post [options]', 'make front matter (and possibly content) for a jekyll post'
-        long_desc Mkmatter::App::Descriptions::New::POST
+        long_desc ERB.new(Mkmatter::App::Descriptions::New::POST).result
     
         def post
       
