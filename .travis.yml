@@ -1,6 +1,6 @@
 language: ruby
 script: echo "Running tests against $(ruby -v) ..."
-bundler_args: --jobs=3 --retry=3 --standalone --system
+bundler_args: --jobs=3 --retry=3 --standalone --deployment
 notifications:
   irc:
     channels:
@@ -18,35 +18,35 @@ jobs:
       - gem install minitest-reporters highline activesupport slugity thor terminal-table os
     script:
     - echo "Running tests against $(ruby -v) ..."
-    - rake -t
+    - bundle exec rake -t
   - stage: test Ruby2.3
     rvm: 2.3.0
     before_script:
       - gem install minitest-reporters highline activesupport slugity thor terminal-table os
     script:
     - echo "Running tests against $(ruby -v) ..."
-    - rake -t
+    - bundle exec rake -t
   - stage: test Ruby2.4
     rvm: 2.4.0
     before_script:
       - gem install minitest-reporters highline activesupport slugity thor terminal-table os
     script:
     - echo "Running tests against $(ruby -v) ..."
-    - rake -t
+    - bundle exec rake -t
   - stage: test Ruby2.5
     rvm: 2.5.0
     before_script:
       - gem install minitest-reporters highline activesupport slugity thor terminal-table os
     script:
     - echo "Running tests against $(ruby -v) ..."
-    - rake -t
+    - bundle exec rake -t
   - stage: test Ruby Head
     rvm: ruby-head
     before_script:
       - gem install minitest-reporters highline activesupport slugity thor terminal-table os
     script:
     - echo "Running tests against $(ruby -v) ..."
-    - rake -t
+    - bundle exec rake -t
   - stage: gem release
     rvm: 2.3.0
     script: echo "Deploying to rubygems.org ..."
