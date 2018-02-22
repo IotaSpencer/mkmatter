@@ -9,6 +9,5 @@
 /.idea/
 /.vscode/
 /vendor/
-Gemfile.lock
 *.gem
 pkg/
