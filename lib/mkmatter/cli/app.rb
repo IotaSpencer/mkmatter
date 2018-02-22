@@ -7,14 +7,12 @@ require 'terminal-table'
 require 'os'
 require 'rbconfig'
 
-require 'mkmatter'
 require 'mkmatter/cli/subs'
 require 'mkmatter/gem_info'
 
 module Mkmatter
   module App
     class CLI < Thor
-
       # \(see {http://www.rubydoc.info/gems/highline/HighLine#initialize-instance_method HighLine#new}\)
       HILINE = HighLine.new($stdin, $stderr, 80)
       map %w[--version -v] => :__print_version

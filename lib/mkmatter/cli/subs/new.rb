@@ -1,4 +1,5 @@
 require 'highline'
+require 'thor'
 
 require 'mkmatter/cli/descriptions'
 require 'mkmatter/cli/methods'

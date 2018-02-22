@@ -5,4 +5,4 @@ Signal.trap('INT') do
   $stderr.puts 'Got INT.. Exiting'
   exit 0
 end
-Mkmatter::App::Runner.new(ARGV.dup).execute!
+Mkmatter::App::CLI.start(ARGV)
