@@ -21,4 +21,4 @@ test:
   stage: test
   script:
   - bundle install --path vendor/bundle
-  - rake spec
+  - bundle exec rake
