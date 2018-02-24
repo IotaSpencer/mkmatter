@@ -35,7 +35,7 @@ module Mkmatter
           tags.each do |tag|
             file = "#{Mkmatter::Methods.get_jekyll_root}/tag/#{tag}.md"
             self.new.create_file file do
-              <<~PUTS
+              <<-PUTS
                 ---
                 #{tag_index unless tag_index.nil?}
                 title: #{tag.titleize}
