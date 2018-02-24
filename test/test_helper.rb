@@ -18,9 +18,6 @@ module Minitest
     # getting rid of default reporters
     drr = dr.instance_variable_get(:@reporters)
     drr.delete_if {|r| r.is_a?(Minitest::SummaryReporter) || r.is_a?(Minitest::ProgressReporter)}
-    
-    # getting rid of rails reporters
-    reporter.reporters.delete_if {|r| r.is_a?(Minitest::SuppressedSummaryReporter) || r.is_a?(Rails::TestUnitReporter)}
   end
 end
 Minitest::Reporters.use!
