@@ -21,8 +21,6 @@ module Mkmatter
       @slug_date   = now.strftime('%Y-%m-%d')
       @published   = publish
       @file_format = question_hash[:file_format]
-      @keywords = question_hash[:keywords]
-      @description = question_hash[:description]
       @matter      = {
           layout:     @layout,
           title:      @title,
