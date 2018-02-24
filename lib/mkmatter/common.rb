@@ -18,14 +18,13 @@ module Mkmatter
     # @param [HighLine] hl A highline context
     # @return [String]
     def get_tags(hl)
-      hl.wrap_at = 20
-      hl.ask 'Tags? (this would be a comma separated list.) '
+      hl.ask 'Tags? (this would be a comma separated list.) ', -> (str) {str.split(',')}
     end
     
     # @param [HighLine] hl A highline context
     # @return [String]
     def get_categories(hl)
-      hl.ask('Categories? (space separated list) ', -> (str) {str.split(' ')})
+      hl.ask 'Categories? (space separated list) ', -> (str) {str.split(' ')}
     end
     
     # @param [HighLine] hl A highline context

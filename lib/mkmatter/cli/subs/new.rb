@@ -11,7 +11,7 @@ module Mkmatter
       # Generate 'New' Content
       class NewContent < Thor
         include Thor::Actions
-        HILINE = HighLine.new($stdin, $stderr, 80)
+        HILINE = HighLine.new($stdin, $stderr, 40)
         option :publish, :type => :boolean
         option :file, :type => :boolean
         desc 'page [options]', 'make front matter (and possibly content) for a jekyll page'
@@ -21,7 +21,7 @@ module Mkmatter
           if options[:file]
         
             if Mkmatter::Methods.check_if_jekyll
-              @questions = Mkmatter::Questions::Page.new(HighLine.new($stdin, $stderr, 30, 0, 2, 1)).ask
+              @questions = Mkmatter::Questions::Page.new(HILINE).ask
               answers    = Mkmatter::Answers.new(@questions, options.fetch(:publish, nil))
               filename   = answers.title.to_slug + '.' + answers.file_format.downcase
               path       = Pathname("./#{filename}").realdirpath
@@ -72,7 +72,7 @@ module Mkmatter
           if options[:draft] and options[:file]
         
             if Mkmatter::Methods.check_if_jekyll
-              @questions  = Mkmatter::Questions::Post.new(HighLine.new($stdin, $stderr, 60)).ask
+              @questions  = Mkmatter::Questions::Post.new(HILINE).ask
               answers     = Mkmatter::Answers.new(@questions, options[:publish])
               file_folder = '_drafts'
               filename    = [].concat([answers.slug_date, '-', answers.title.to_slug, '.', answers.file_format.downcase]).join
@@ -108,7 +108,7 @@ module Mkmatter
           elsif options[:file] and options[:draft].nil? or options[:draft] == false
         
             if Mkmatter::Methods.check_if_jekyll
-              @questions  = Mkmatter::Questions::Post.new(HighLine.new($stdin, $stderr, 60)).ask
+              @questions  = Mkmatter::Questions::Post.new(HILINE).ask
               answers     = Mkmatter::Answers.new(@questions, options[:publish])
               file_folder = '_posts'
               filename    = [].concat([answers.slug_date, '-', answers.title.to_slug, '.', answers.file_format.downcase]).join('')
@@ -145,7 +145,7 @@ module Mkmatter
             end
       
           elsif options[:draft].nil? and options[:file].nil?
-            @questions = Mkmatter::Questions::Post.new(HighLine.new($stdin, $stderr, 80)).ask
+            @questions = Mkmatter::Questions::Post.new(HILINE).ask
             answers    = Mkmatter::Answers.new(@questions, options[:publish])
             puts ''
             puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
