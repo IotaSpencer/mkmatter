@@ -48,7 +48,7 @@ module Mkmatter
               tags << value
             end
             all_tags = tags.flatten.sort.uniq
-            all_tags
+            Mkmatter::Tags.gen_post_tags all_tags
           else
             $stderr.puts "#{HILINE.color('Error', :red, :bold)}: Not a Jekyll source directory (no '_config.yml' found in any parent directory)"
           end
