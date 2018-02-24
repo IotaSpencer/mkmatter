@@ -1,7 +1,11 @@
 require 'mkmatter/cli/methods'
-
+require 'thor'
+require 'front_matter_parser'
+require 'active_support/inflector'
 module Mkmatter
-  class Tags
+  class Tags < Thor
+    include Thor::Actions
+    HILINE = HighLine.new($stdin, $stderr, 80)
     
     def Tags.has_tag_folder?
       if Mkmatter::Methods.check_if_jekyll
@@ -15,50 +19,49 @@ module Mkmatter
       end
     end
     
-    def Tags.gen_post_tags
+    # @param [Array] tags Array of tags to generate pages for
+    # @return [Boolean] whether generation was successful
+    def Tags.gen_post_tags(tags)
       if Mkmatter::Methods.check_if_jekyll
         if Tags.has_tag_folder?
-        
+          if HILINE.agree('Do you have a layout page where tags list the post they belong to? (y/n) ', true)
+            tag_index = HILINE.ask 'Whats the layout name? ' do |q|
+              q.default = 'tag_index'
+              q.confirm = true
+            end
+            
+            tag_index = 'layout: ' + tag_index
+          end
+          tags.each do |tag|
+            file = "#{Mkmatter::Methods.get_jekyll_root}/tag/#{tag}.md"
+            self.new.create_file file do
+              <<~PUTS
+                ---
+                #{tag_index unless tag_index.nil?}
+                title: #{tag.titleize}
+                tag: #{tag}
+                ---
+              PUTS
+            end
+          end
         else
         end
       end
     end
     
-    # @param [String] type Gets tags from content type TYPE
-    def Tags.get_tags_of_type(type)
-      unless type =~ /^(post|page)$/
-        raise ArgumentError
+    def Tags.get_tags
+      yaml_loader  = ->(string) {YAML.load(string)}
+      files        = []
+      front_matter = {}
+      
+      Find.find(Pathname(Methods.get_jekyll_root).join('_posts').to_path) do |path|
+        files << path if path =~ /.*(\.html|\.md)$/
       end
-      yaml_loader       = ->(string) {YAML.load(string)}
-      files             = {}
-      html_front_matter = []
-      md_front_matter   = []
-      front_matter      = {}
-      case type
-        when 'page'
-          Find.find(Methods.get_jekyll_root.to_s) do |path|
-            Find.prune if path =~ /(_includes|_layouts|_docs|_site)/ # don't include layouts, includes, site, docs
-            Find.prune if path =~ /(_posts)/ # don't include our own posts either
-            Find.prune if path =~ /(vendor\/bundle)/ # don't include vendor/
-            Find.prune if path =~ /(\/tag\/)/ # don't include our own tags
-            html_front_matter << path if path =~ /.*\.html$/
-            md_front_matter << path if path =~ /.*\.md$/
-          end
-        
-        when 'post'
-          Find.find(Pathname(Methods.get_jekyll_root).join('_posts').to_path) do |path|
-            html_front_matter << path if path =~ /.*\.html$/
-            md_front_matter << path if path =~ /.*\.md$/
-          end
-        else
-          # noop
-      end
-      files['html'] = html_front_matter
-      files['md']   = md_front_matter
-      files.each do |ftype, array|
-        array.each do |ele|
-          front_matter[ele] = FrontMatterParser::Parser.parse_file(ele, syntax_parser: :md, loader: yaml_loader)[key]
-        end
+      files.each do |ele|
+        yaml = FrontMatterParser::Parser.parse_file(ele, syntax_parser: :md, loader: yaml_loader).front_matter
+        front_matter[ele] = yaml['tags'] if yaml['tags']
+        front_matter[ele] = yaml['tag'] if yaml['tag']
+
       end
       front_matter.select! {|k, v| !v.nil?}
       front_matter
