@@ -21,7 +21,7 @@ module Mkmatter
           if options[:file]
         
             if Mkmatter::Methods.check_if_jekyll
-              @questions = Mkmatter::Questions::Page.new(HighLine.new($stdin, $stderr, 80)).ask
+              @questions = Mkmatter::Questions::Page.new(HighLine.new($stdin, $stderr, 30, 0, 2, 1)).ask
               answers    = Mkmatter::Answers.new(@questions, options.fetch(:publish, nil))
               filename   = answers.title.to_slug + '.' + answers.file_format.downcase
               path       = Pathname("./#{filename}").realdirpath
@@ -72,7 +72,7 @@ module Mkmatter
           if options[:draft] and options[:file]
         
             if Mkmatter::Methods.check_if_jekyll
-              @questions  = Mkmatter::Questions::Post.new(HighLine.new($stdin, $stderr, 80)).ask
+              @questions  = Mkmatter::Questions::Post.new(HighLine.new($stdin, $stderr, 60)).ask
               answers     = Mkmatter::Answers.new(@questions, options[:publish])
               file_folder = '_drafts'
               filename    = [].concat([answers.slug_date, '-', answers.title.to_slug, '.', answers.file_format.downcase]).join
@@ -108,7 +108,7 @@ module Mkmatter
           elsif options[:file] and options[:draft].nil? or options[:draft] == false
         
             if Mkmatter::Methods.check_if_jekyll
-              @questions  = Mkmatter::Questions::Post.new(HighLine.new($stdin, $stderr, 80)).ask
+              @questions  = Mkmatter::Questions::Post.new(HighLine.new($stdin, $stderr, 60)).ask
               answers     = Mkmatter::Answers.new(@questions, options[:publish])
               file_folder = '_posts'
               filename    = [].concat([answers.slug_date, '-', answers.title.to_slug, '.', answers.file_format.downcase]).join('')
