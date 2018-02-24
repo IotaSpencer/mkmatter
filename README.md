@@ -1,31 +1,20 @@
 # mkmatter
 
- Builds & Links
-
-<div>
 
 [![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/dev.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
 [![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/master.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
-</div>
-<div class="m-0 p-0">
 
 [![Github commits (since latest release)](https://img.shields.io/github/commits-since/IotaSpencer/mkmatter/latest.svg?style=for-the-badge)]()
 [![GitHub commits](https://img.shields.io/github/commits-since/IotaSpencer/mkmatter/3.0.38.svg?style=for-the-badge)]()
-</div>
 
-###### Gem
 [![Gem](https://img.shields.io/gem/v/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
 [![GitHub tag](https://img.shields.io/github/tag/IotaSpencer/mkmatter.svg?style=for-the-badge)](https://github.com/IotaSpencer/mkmatter/tree/v3.0.27)
 
-
 [![Gem](https://img.shields.io/gem/dt/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
 [![Gem](https://img.shields.io/gem/dtv/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
-
-###### Badges
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![forthebadge](https://forthebadge.com/images/badges/uses-badges.svg)](https://forthebadge.com)
 
+[![forthebadge](https://forthebadge.com/images/badges/uses-badges.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com)
 
@@ -78,7 +67,7 @@ or
 
 ## Usage
 
-**See [Wiki](https://github.com/IotaSpencer/mkmatter/wiki)
+**See [Wiki](https://github.com/IotaSpencer/mkmatter/wiki)**
 
 ## Contributing
 
