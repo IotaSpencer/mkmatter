@@ -21,17 +21,27 @@ module Mkmatter
     
     # @param [Array] tags Array of tags to generate pages for
     # @return [Boolean] whether generation was successful
+    def Tags.dry_gen(tags)
+      if Mkmatter::Methods.check_if_jekyll
+        if Tags.has_tag_folder?
+          tags.each do |tag|
+            file = "#{Mkmatter::Methods.get_jekyll_root}/tag/#{tag}.md"
+            puts <<-PUTS.strip_heredoc
+                ---
+
+                title: #{tag.titleize}
+                tag: #{tag}
+                ---
+              PUTS
+          end
+        else
+        end
+      end
+    end
+
     def Tags.gen_post_tags(tags)
       if Mkmatter::Methods.check_if_jekyll
         if Tags.has_tag_folder?
-          if HILINE.agree('Do you have a layout page where tags list the post they belong to? (y/n) ', true)
-            tag_index = HILINE.ask 'Whats the layout name? ' do |q|
-              q.default = 'tag_index'
-              q.confirm = true
-            end
-            
-            tag_index = 'layout: ' + tag_index
-          end
           tags.each do |tag|
             file = "#{Mkmatter::Methods.get_jekyll_root}/tag/#{tag}.md"
             self.new.create_file file do
