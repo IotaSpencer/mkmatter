@@ -8,7 +8,7 @@ module Mkmatter
     # @return [String]
     def get_title(hl)
       title = hl.ask 'Title: '
-      if hl.agree("Would you like it 'titleized' (Title instead of title)?", true)
+      if hl.agree("Would you like it 'titleized' (Title instead of title)? ", true)
         title.titleize
       else
         title
@@ -18,7 +18,8 @@ module Mkmatter
     # @param [HighLine] hl A highline context
     # @return [String]
     def get_tags(hl)
-      hl.ask('Tags? (space separated list) ', -> (str) {str.split(' ')})
+      hl.wrap_at = 20
+      hl.ask 'Tags? (this would be a comma separated list.) '
     end
     
     # @param [HighLine] hl A highline context
@@ -42,10 +43,9 @@ module Mkmatter
         m.choice :neither
         m.prompt = '? '
       end
-      case timezone
-        when :neither
+      case
+        when timezone == :neither
           custom = hl.ask('Other Time Zone: ', String)
-        else
       end
       if custom
         hl.say('Checking TimeZone Validity')
@@ -70,12 +70,6 @@ module Mkmatter
         menu.choice 'md'
         menu.prompt = '? '
       end
-    end
-    def get_keywords(hl)
-      hl.ask("Meta Keywords? (example: 'space 'spaced', comma separated, page keywords, goes here') ")
-    end
-    def get_description(hl)
-      hl.ask("Meta Description? (example: 'This page is a bunch of right nonsense.' ")
     end
   end
 end
