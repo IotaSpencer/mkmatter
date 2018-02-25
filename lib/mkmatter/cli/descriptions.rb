@@ -5,7 +5,7 @@ module Mkmatter
   module App
     module Descriptions
       module New
-        PAGE = <<-PAGEDOC
+        PAGE = ERB.new(<<-PAGEDOC.strip_heredoc
         `mkmatter new page` will run you through making a jekyll page.
 
         Given the above options/flags you can modify how the script
@@ -13,8 +13,9 @@ module Mkmatter
         outputs your front matter, or whether to mark it as published.
 
         PAGEDOC
+        ).result
 
-        POST = <<-POSTDOC
+        POST = ERB.new(<<-POSTDOC.strip_heredoc
           `mkmatter new post` will run you through making a jekyll post.
 
           Given the above options/flags you can modify how the script
@@ -34,12 +35,14 @@ module Mkmatter
              <%= HighLine.color('false', :yellow, :bold) %>`
 
         POSTDOC
+        ).result
       end
 
       module Tags
-        GEN = <<-GENDOC
+        GEN = ERB.new(<<-GENDOC
 
         GENDOC
+        ).result
       end
     end
   end
