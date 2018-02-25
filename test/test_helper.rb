@@ -1,6 +1,5 @@
 require 'minitest/reporters'
 require 'minitest'
-
 require_relative '../lib/minitest/xs_and_os_plugin'
 module Minitest
   # copied from minitest
