@@ -15,11 +15,10 @@ module Mkmatter
         option :publish, :type => :boolean
         option :file, :type => :boolean
         desc 'page [options]', 'make front matter (and possibly content) for a jekyll page'
-        long_desc ERB.new(Mkmatter::App::Descriptions::New::PAGE).result
+        long_desc Mkmatter::App::Descriptions::New::PAGE
     
         def page
           if options[:file]
-        
             if Mkmatter::Methods.check_if_jekyll
               @questions = Mkmatter::Questions::Page.new(HILINE).ask
               answers    = Mkmatter::Answers.new(@questions, options.fetch(:publish, nil))
@@ -65,7 +64,7 @@ module Mkmatter
         option :file, :type => :boolean
         option :draft, :type => :boolean
         desc 'post [options]', 'make front matter (and possibly content) for a jekyll post'
-        long_desc ERB.new(Mkmatter::App::Descriptions::New::POST).result
+        long_desc Mkmatter::App::Descriptions::New::POST
     
         def post
       
@@ -143,7 +142,6 @@ module Mkmatter
               puts "Not in a Jekyll directory. (no '_config.yml' in any parent directory)"
               exit 1
             end
-      
           elsif options[:draft].nil? and options[:file].nil?
             @questions = Mkmatter::Questions::Post.new(HILINE).ask
             answers    = Mkmatter::Answers.new(@questions, options[:publish])
@@ -152,7 +150,6 @@ module Mkmatter
             puts '---'
       
           end
-    
         end
       end
     end
