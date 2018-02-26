@@ -40,7 +40,7 @@ class MkmatterTest < Minitest::Test
     }
     
   end
-  def test_that_nonexistant_command_errors
+  def test_that_nonexistent_command_errors
     assert_output('', /Could not find command ".*"\./) {
       @app.start(%w(nope this doesnt exist))
     }

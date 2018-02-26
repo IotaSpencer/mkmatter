@@ -9,22 +9,20 @@ module Minitest
     end
     
     class TravisReporter < Minitest::Reporters::BaseReporter
-      COLOR_FOR_RESULT_CODE  = {
-          "." => :green,
-          "E" => :red,
-          "F" => :red,
-          "$" => :yellow
+      @color_for_result_code  = {
+          '.' => :green,
+          'E' => :red,
+          'F' => :red,
+          '$' => :yellow
       }
-      RESULT_CODE_TO_UNICODE = {
+      @result_code_to_unicode = {
           '.' => "\u{2714}",
           'F' => "\u{2718}",
           'E' => "\u{203C}",
           '$' => "\u{26A1}"
         
       }
-      
-      
-      COLOR = {
+      @color = {
           red:    31,
           green:  32,
           yellow: 33,
@@ -169,7 +167,7 @@ module Minitest
       end
       
       def print_result_code(result_code)
-        result_code = RESULT_CODE_TO_UNICODE[result_code]
+        result_code = @result_code_to_unicode[result_code]
         colors      = {
             "\u{2714}" => :green,
             "\u{2718}" => :red,
@@ -181,7 +179,7 @@ module Minitest
       
       def color(string, color = :default)
         if color_enabled?
-          color = COLOR.fetch(color, 0)
+          color = @color.fetch(color, 0)
           "\e[#{color}m#{string}\e[0m"
         else
           string
