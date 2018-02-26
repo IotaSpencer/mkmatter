@@ -1,5 +1,7 @@
 # mkmatter
 
+[![Join the chat at https://gitter.im/mkmatter/Lobby](https://badges.gitter.im/mkmatter/Lobby.svg)](https://gitter.im/mkmatter/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
  Builds & Links
 
 <div>
