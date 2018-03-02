@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mkmatter (3.0.43)
+    mkmatter (3.0.44)
       activesupport (~> 5.1)
       front_matter_parser (~> 0.1)
       git (~> 1.3)
