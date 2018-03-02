@@ -9,28 +9,29 @@ module Minitest
     end
     
     class TravisReporter < Minitest::Reporters::BaseReporter
-      @color_for_result_code  = {
-          '.' => :green,
-          'E' => :red,
-          'F' => :red,
-          '$' => :yellow
-      }
-      @result_code_to_unicode = {
-          '.' => "\u{2714}",
-          'F' => "\u{2718}",
-          'E' => "\u{203C}",
-          '$' => "\u{26A1}"
-      }
-      @color = {
-          red:    31,
-          green:  32,
-          yellow: 33,
-          blue:   34
-      }
+      
       
       def initialize(*)
         super
         @color_enabled = io.respond_to?(:tty?) && io.tty?
+        @color_for_result_code  = {
+            '.' => :green,
+            'E' => :red,
+            'F' => :red,
+            '$' => :yellow
+        }
+        @result_code_to_unicode = {
+            '.' => "\u{2714}",
+            'F' => "\u{2718}",
+            'E' => "\u{203C}",
+            '$' => "\u{26A1}"
+        }
+        @color                  = {
+            red:    31,
+            green:  32,
+            yellow: 33,
+            blue:   34
+        }
       end
       
       def record(result)
@@ -62,8 +63,8 @@ module Minitest
         color = :red if failing_results.any?
         
         if failing_results.any? || skipped_results.any?
-          failing_results.each.with_index(1) {|result, index| display_failing(result, index)}
-          skipped_results.each.with_index(failing_results.size + 1) {|result, index| display_skipped(result, index)}
+          failing_results.each.with_index(1) { |result, index| display_failing(result, index) }
+          skipped_results.each.with_index(failing_results.size + 1) { |result, index| display_skipped(result, index) }
         end
         
         io.print "\n\n"
@@ -72,7 +73,7 @@ module Minitest
         
         if failing_results.any?
           io.puts "\nFailed Tests:\n"
-          failing_results.each {|result| display_replay_command(result)}
+          failing_results.each { |result| display_replay_command(result) }
           io.puts "\n\n"
         end
       end
@@ -141,7 +142,7 @@ module Minitest
       end
       
       def backtrace(backtrace)
-        backtrace = filter_backtrace(backtrace).map {|line| location(line, true)}
+        backtrace = filter_backtrace(backtrace).map { |line| location(line, true) }
         return if backtrace.empty?
         indent(backtrace.join("\n")).gsub(/^(\s+)/, "\\1# ")
       end
@@ -167,7 +168,7 @@ module Minitest
       
       def print_result_code(result_code)
         result = @result_code_to_unicode[result_code]
-        colors      = {
+        colors = {
             "\u{2714}" => :green,
             "\u{2718}" => :red,
             "\u{203C}" => :red,
