@@ -49,8 +49,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'minitest', '~> 5'
   spec.add_development_dependency 'minitest-reporters', '~> 1.1'
-  spec.post_install_message = <<-POSTINSTALL.strip_heredoc
-  
-  
-  POSTINSTALL
+  spec.post_install_message = [
+      "Thanks for installing 'mkmatter', It means a lot to me.",
+      "If you'd like to install 'micro', a text editor bundled with 'mkmatter'.",
+      "Then just run 'bundle exec micro-install' or 'micro-install',",
+      "depending on how you installed 'mkmatter'."
+  ].join("\n")
 end
