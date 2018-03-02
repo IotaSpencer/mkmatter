@@ -20,7 +20,6 @@ module Minitest
           'F' => "\u{2718}",
           'E' => "\u{203C}",
           '$' => "\u{26A1}"
-        
       }
       @color = {
           red:    31,
@@ -167,14 +166,14 @@ module Minitest
       end
       
       def print_result_code(result_code)
-        result_code = @result_code_to_unicode[result_code]
+        result = @result_code_to_unicode[result_code]
         colors      = {
             "\u{2714}" => :green,
             "\u{2718}" => :red,
             "\u{203C}" => :red,
             "\u{26A1}" => :yellow
         }
-        io.print color(result_code, colors[result_code])
+        io.print color(result_code, colors[result])
       end
       
       def color(string, color = :default)
