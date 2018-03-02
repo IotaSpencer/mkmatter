@@ -46,7 +46,7 @@ module Mkmatter
                 fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
                 fd.puts '---'
               end
-              Mkmatter::Methods.launch_editor(path)
+              Mkmatter::Methods.launch_editor(options[:editor], path)
             else
               puts "Not in a Jekyll directory. (no '_config.yml' in any parent directory)"
               exit 1
@@ -99,7 +99,7 @@ module Mkmatter
                 fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
                 fd.puts '---'
               end
-              Mkmatter::Methods.launch_editor(path)
+              Mkmatter::Methods.launch_editor(options[:editor], path)
             else
               puts "Not in a Jekyll directory. (no '_config.yml' in any parent directory)"
               exit 1
@@ -137,7 +137,7 @@ module Mkmatter
                 fd.puts '---'
               end
           
-              Mkmatter::Methods.launch_editor(path)
+              Mkmatter::Methods.launch_editor(options[:editor], path)
             else
               puts "Not in a Jekyll directory. (no '_config.yml' in any parent directory)"
               exit 1

@@ -31,11 +31,11 @@ module Mkmatter
     end
     
     # @return [NilClass] nil
-    def Methods.launch_editor(file_path)
+    def Methods.launch_editor(editor, file_path)
       hl = HighLine.new($stdin, $stderr, 80)
       if file_path
         if hl.agree("Would you like to open an editor? ('editor' command) ", true)
-          pid = spawn("editor #{file_path}")
+          pid = spawn("#{} #{file_path}")
           Process.wait pid
         end
       end
