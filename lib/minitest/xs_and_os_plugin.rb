@@ -21,7 +21,7 @@ module Minitest
           'E' => "\u{203C}",
           '$' => "\u{26A1}"
       }
-      @@color                  = {
+      @@color = {
           red:    31,
           green:  32,
           yellow: 33,
@@ -179,7 +179,7 @@ module Minitest
       
       def color(string, color = :default)
         if color_enabled?
-          color = @color.fetch(color, 0)
+          color = @@color.fetch(color, 0)
           "\e[#{color}m#{string}\e[0m"
         else
           string
