@@ -1,6 +1,5 @@
 # mkmatter
 
-
 [![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/dev.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
 [![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/master.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
 
@@ -24,7 +23,6 @@
 
 [![E-mail](https://img.shields.io/badge/mkmatter%20on%20IotaSpencer%2eme-Project-green.svg?style=for-the-badge)](https://iotaspencer.me/projects/mkmatter)
 
-
 ## About mkmatter
 
 'mkmatter' is a gem designed to make it easy to generate front matter for files and also subsequently edit them.
@@ -35,6 +33,24 @@ This is needed for any part that `reads from/writes to` the filesystem.
 
 ## Installation
 
+**Note**: Thanks to [@zyedidia](https://github.com/zyedidia), His project [micro](https://github.com/zyedidia/micro) has been bundled alongside mkmatter. Just by using one command you can install it for your own use.
+
+However, to use micro the way its installed using the gem, you need to have the directory in your `$PATH`.
+
+### Micro Installation
+
+Add 
+```shell
+PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+```
+
+If you do install micro, it will use micro by default unless you override it with `--editor=EDITOR`
+
+
+### Mkmatter Installation
+
+#### Bundler
+
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -42,25 +58,32 @@ gem 'mkmatter'
 ```
 
 And then execute:
+```
+$ bundle install
+```
 
-    $ bundle install
-
-### Standalone
+#### Standalone
 
 To install to the system/user instead of a project, use the following
 
-#### System-wide
+##### System-wide
 As root or by using sudo, run:
 
-```$ gem install mkmatter```
+```
+$ gem install mkmatter
+```
 
 or
 
-```$ sudo gem install mkmatter```
+```
+$ sudo gem install mkmatter
+```
 
-#### User
+##### User
 
-```$ gem install --user-install mkmatter```
+```
+$ gem install --user-install mkmatter
+```
 
 ## Usage
 
