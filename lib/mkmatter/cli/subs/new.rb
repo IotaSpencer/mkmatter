@@ -43,6 +43,7 @@ module Mkmatter
                 path = Pathname(folder).realdirpath.join(filename)
               end
               File.open(path.to_path, 'a') do |fd|
+                answers.to_h = {'layout' => 'page'}
                 fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
                 fd.puts '---'
               end
@@ -52,6 +53,7 @@ module Mkmatter
               exit 1
             end
           else
+            @questions = Mkmatter::Questions::Page.new(HILINE).ask
             answers = Mkmatter::Answers.new(@questions, options.fetch(:publish, nil))
             puts ''
             puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
@@ -96,6 +98,7 @@ module Mkmatter
                 path = Pathname(folder).realdirpath.join(filename)
               end
               File.open(path.to_path, 'a') do |fd|
+                answers.to_h = {'layout' => 'post'}
                 fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
                 fd.puts '---'
               end
@@ -133,6 +136,7 @@ module Mkmatter
                 path = Pathname(folder).realdirpath.join(filename)
               end
               File.open(path.to_path, 'a') do |fd|
+                answers.to_h = {'layout' => 'post'}
                 fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
                 fd.puts '---'
               end
