@@ -4,14 +4,12 @@ require 'highline'
 module Mkmatter
   class Answers
     attr_accessor :title, :tags, :categories
-    attr_accessor :date, :layout, :draft
+    attr_accessor :date, :draft
     attr_accessor :slug_date, :answer_hash
     attr_accessor :published, :file_format
     attr_reader :matter
     
     def initialize(question_hash, publish)
-      
-      @layout      = question_hash[:layout]
       @title       = question_hash[:title]
       @tags        = question_hash[:tags]
       @categories  = question_hash[:categories]
