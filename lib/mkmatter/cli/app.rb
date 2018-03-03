@@ -84,7 +84,10 @@ module Mkmatter
       end
       
       if Pathname(Dir.home).join('.local/bin/micro').exist?
-        class_option(:editor, type: :string, default: "#{Dir.home}/.local/bin")
+        class_option(:editor, type: :string, default: "#{Dir.home}/.local/bin/micro")
+        
+      elsif Methods.which('micro')
+        class_option(:editor, type: :string, default: 'micro')
       else
         class_option(:editor, type: :string, default: 'nano')
       end
