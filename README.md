@@ -4,9 +4,6 @@
 [![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/dev.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
 [![Travis branch](https://img.shields.io/travis/IotaSpencer/mkmatter/master.svg?style=for-the-badge)](https://travis-ci.org/IotaSpencer/mkmatter)
 
-[![Github commits (since latest release)](https://img.shields.io/github/commits-since/IotaSpencer/mkmatter/latest.svg?style=for-the-badge)]()
-[![GitHub commits](https://img.shields.io/github/commits-since/IotaSpencer/mkmatter/3.0.38.svg?style=for-the-badge)]()
-
 [![Gem](https://img.shields.io/gem/v/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
 [![GitHub tag](https://img.shields.io/github/tag/IotaSpencer/mkmatter.svg?style=for-the-badge)](https://github.com/IotaSpencer/mkmatter/tree/v3.0.27)
 
