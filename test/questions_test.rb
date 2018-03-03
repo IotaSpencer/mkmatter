@@ -22,11 +22,13 @@ class QuestionsTest < MiniTest::Test
     @input << "some title\ny\nsome,tags,here,multi word too\nsome categories here\n1\n2\n"
     @input.rewind
     @questions::Post.new(@terminal).ask
+    @input = StringIO.new
     
   end
   def test_that_page_questions_no_file_and_no_draft_works
     @input << "some title\ny\nsome,tags,here,multi word too\nsome categories here\n1\n2\n"
     @input.rewind
     @questions::Page.new(@terminal).ask
+    @input = StringIO.new
   end
 end
