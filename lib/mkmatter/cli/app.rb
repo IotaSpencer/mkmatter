@@ -31,15 +31,15 @@ module Mkmatter
       def __debug
         report = YAML.safe_load(OS.report)
         rows   = {
-            'mkmatter_version' => Mkmatter::VERSION,
-            'ruby_version'     => RbConfig::CONFIG['RUBY_PROGRAM_VERSION'],
+            :mkmatter_version => Mkmatter::VERSION,
+            :ruby_version     => RbConfig::CONFIG['RUBY_PROGRAM_VERSION'],
         }
         rows.merge! report
         rows.merge!({
-                        'ruby_bin'      => OS.ruby_bin,
-                        'windows'       => OS.windows?,
-                        'posix'         => OS.posix?,
-                        'mac'           => OS.mac?,
+                        'ruby bin'      => OS.ruby_bin,
+                        :windows        => OS.windows?,
+                        :posix          => OS.posix?,
+                        :mac            => OS.mac?,
                         'under windows' => OS::Underlying.windows?,
                         'under bsd'     => OS::Underlying.bsd?,
                     })
