@@ -1,6 +1,5 @@
 require 'highline'
 require 'thor'
-
 require 'mkmatter/cli/descriptions'
 require 'mkmatter/cli/methods'
 require 'mkmatter/questions'
@@ -37,19 +36,19 @@ module Mkmatter
                 begin
                   FileUtils.mkdir_p(File.join(Mkmatter::Methods.get_jekyll_root, folder))
                 rescue Errno::EEXIST
-                  HILINE.say("<%= color('Error', :red, :bold) %>:Insufficient Permissions")
+                  HILINE.say("<%= Paint['Error', 'red', :bold] %>: Insufficient Permissions")
                   exit 1
                 end
                 path = Pathname(folder).realdirpath.join(filename)
               end
               File.open(path.to_path, 'a') do |fd|
-                answers.to_h = {'layout' => 'page'}
+                answers.to_h = {:layout => 'page'}
                 fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
                 fd.puts '---'
               end
               Mkmatter::Methods.launch_editor(options[:editor], path)
             else
-              puts "Not in a Jekyll directory. (no '_config.yml' in any parent directory)"
+              $stderr.puts "Not in a Jekyll directory. (no '_config.yml' in any parent directory)"
               exit 1
             end
           else
@@ -69,9 +68,7 @@ module Mkmatter
         long_desc Mkmatter::App::Descriptions::New::POST
     
         def post
-      
           if options[:draft] and options[:file]
-        
             if Mkmatter::Methods.check_if_jekyll
               @questions  = Mkmatter::Questions::Post.new(HILINE).ask
               answers     = Mkmatter::Answers.new(@questions, options[:publish])
@@ -82,7 +79,7 @@ module Mkmatter
               if HILINE.agree('Would you like to put this page into a subdirectory?', true)
                 HILINE.say("What path? (directories will be created if they don't exist)")
                 HILINE.say("Don't use a path starting with a slash, just put a relative path.")
-                HILINE.say('<%= color(\'Good\', :green, :bold) %>: path/to/dir ‖ <%= color(\'Bad\', :red, :bold) %>: /root/paths/are/bad/mmkay')
+                HILINE.say("<% Paint['Good', 'green', :bold] %>: path/to/dir ‖ <%= color('Bad', 'red', :bold) %>: /root/paths/are/bad/mmkay")
                 folder = HILINE.ask('? ') do |q|
                   q.confirm  = true
                   q.default  = '.'
@@ -92,13 +89,13 @@ module Mkmatter
                 begin
                   FileUtils.mkdir_p(File.join(Mkmatter::Methods.get_jekyll_root, folder))
                 rescue Errno::EEXIST
-                  HILINE.say("<%= color('Error', :red, :bold) %>:Insufficient Permissions")
+                  HILINE.say("<% Paint['Error', 'red', :bold] %>:Insufficient Permissions")
                   exit 1
                 end
                 path = Pathname(folder).realdirpath.join(filename)
               end
               File.open(path.to_path, 'a') do |fd|
-                answers.to_h = {'layout' => 'post'}
+                answers.to_h = {:layout => 'post'}
                 fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
                 fd.puts '---'
               end
@@ -120,7 +117,7 @@ module Mkmatter
                 HILINE.say('----------------')
                 HILINE.say("Don't use a path starting with a slash, just put a relative path.")
                 HILINE.say("If you enter a path you don't like, you will have manually remove it if you confirm it.")
-                HILINE.say('<%= color(\'Good\', :green, :bold) %>: path/to/dir ‖ <%= color(\'Bad\', :red, :bold) %>: /root/paths/are/bad/mmkay')
+                HILINE.say("<% Paint['Good', 'green', :bold] %>: path/to/dir ‖ <% Paint['Bad', :red, :bold] %>: /root/paths/are/bad/mmkay")
                 folder = HILINE.ask('? ') do |q|
                   q.confirm  = true
                   q.default  = '.'
@@ -130,13 +127,13 @@ module Mkmatter
                 begin
                   FileUtils.mkdir_p(File.join(Mkmatter::Methods.get_jekyll_root, folder))
                 rescue Errno::EEXIST
-                  HILINE.say("<%= color('Error', :red, :bold) %>:Insufficient Permissions")
+                  HILINE.say("<% Paint['Error', 'red', :bold] %>:Insufficient Permissions")
                   exit 1
                 end
                 path = Pathname(folder).realdirpath.join(filename)
               end
               File.open(path.to_path, 'a') do |fd|
-                answers.to_h = {'layout' => 'post'}
+                answers.to_h = {:layout => 'post'}
                 fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
                 fd.puts '---'
               end
