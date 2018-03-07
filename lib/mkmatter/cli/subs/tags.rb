@@ -1,5 +1,5 @@
 require 'thor'
-require 'highline'
+require 'paint'
 require 'mkmatter/cli/methods'
 require 'mkmatter/cli/tags'
 module Mkmatter
@@ -7,8 +7,6 @@ module Mkmatter
     module Classes
       class Tags < Thor
         include Thor::Actions
-        HILINE = HighLine.new($stdin, $stderr, 80)
-        
         desc 'find [options] TYPE', 'find content of type TYPE'
         # @param [String] type Type of content
         def find(type)
@@ -16,7 +14,7 @@ module Mkmatter
             table                      = Terminal::Table.new
             table.title                = 'Tags'
             table.style.all_separators = true
-            table.headings             = ["#{HILINE.color('Path from Jekyll Root', :bold)}", "#{HILINE.color('Tags', :bold)}"]
+            table.headings             = ["#{Paint['Path from Jekyll Root', 'white', :bold]}", "#{Paint['Tags', 'white', :bold]}"]
             
             front_matter = Mkmatter::Methods.find_front_matter(type, 'tags')
             front_matter.each do |path, tags|
@@ -26,7 +24,7 @@ module Mkmatter
             table.align_column(1, :right)
             puts table
           else
-            $stderr.puts "#{HILINE.color('Error', :red, :bold)}: Not a Jekyll source directory (no '_config.yml' found in any parent directory)"
+            $stderr.puts "#{Paint['Error', :red, :bold]}: Not a Jekyll source directory (no '_config.yml' found in any parent directory)"
           end
         end
         
@@ -36,7 +34,7 @@ module Mkmatter
           if Mkmatter::Methods.check_if_jekyll
           
           else
-            $stderr.puts "#{HILINE.color('Error', :red, :bold)}: Not a Jekyll source directory (no '_config.yml' found in any parent directory)"
+            $stderr.puts "#{Paint['Error', :red, :bold]}: Not a Jekyll source directory (no '_config.yml' found in any parent directory)"
           end
         end
         
@@ -55,7 +53,7 @@ module Mkmatter
               all_tags = tags.flatten.sort.uniq
               Mkmatter::Tags.dry_gen all_tags
             else
-              HILINE.say "<% color('Error', :red, :bold) %>: No tag folder"
+              $stderr.puts "#{Paint['Error', :red, :bold]}: No tag folder"
             end
           else
             if Mkmatter::Tags.has_tag_folder?
@@ -67,10 +65,9 @@ module Mkmatter
               all_tags = tags.flatten.sort.uniq
               Mkmatter::Tags.gen_post_tags all_tags
             else
-              $stderr.puts "#{HILINE.color('Error', :red, :bold)}: Not a Jekyll source directory (no '_config.yml' found in any parent directory)"
+              $stderr.puts "#{Paint['Error', :red, :bold]}: Not a Jekyll source directory (no '_config.yml' found in any parent directory)"
             end
           end
-        
         end
       end
     end
