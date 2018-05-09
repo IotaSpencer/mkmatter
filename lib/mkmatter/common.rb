@@ -14,19 +14,19 @@ module Mkmatter
         title
       end
     end
-    
+
     # @param [HighLine] hl A highline context
     # @return [String]
     def get_tags(hl)
       hl.ask 'Tags? (this would be a comma separated list.) ', -> (str) {str.split(',')}
     end
-    
+
     # @param [HighLine] hl A highline context
     # @return [String]
     def get_categories(hl)
       hl.ask 'Categories? (space separated list) ', -> (str) {str.split(' ')}
     end
-    
+
     # @param [HighLine] hl A highline context
     # @return [String]
     def get_time_zone(hl)
@@ -59,14 +59,18 @@ module Mkmatter
         custom
       end
     end
-    
+
     # @param [HighLine] hl A highline context
     # @return [String]
     def get_file_format(hl)
       hl.choose do |menu|
-        menu.header = 'Choose whether you want HTML or Markdown (md)'
-        menu.choice 'html'
-        menu.choice 'md'
+        menu.header = 'Choose whether you want HTML or Markdown'
+        menu.choice 'html' do
+          return 'html'
+        end
+        menu.choice 'md' do
+          return 'md'
+        end
         menu.prompt = '? '
       end
     end
