@@ -12,10 +12,11 @@ module Mkmatter
         include Thor::Actions
         HILINE = HighLine.new($stdin, $stderr, 40)
         option :publish, :type => :boolean
-        option :file, :type => :boolean
+        option :file, :type => :boolean, :default => nil
+        method_options %w( template -t ) => :boolean
         desc 'page [options]', 'make front matter (and possibly content) for a jekyll page'
         long_desc Mkmatter::App::Descriptions::New::PAGE
-    
+
         def page
           if options[:file]
             if Mkmatter::Methods.check_if_jekyll
@@ -59,14 +60,14 @@ module Mkmatter
             puts '---'
           end
         end
-    
-    
+
+
         option :publish, :type => :boolean
-        option :file, :type => :boolean
-        option :draft, :type => :boolean
+        option :file, :type => :boolean, :default => nil
+        option :draft, :type => :boolean, :default => nil
         desc 'post [options]', 'make front matter (and possibly content) for a jekyll post'
         long_desc Mkmatter::App::Descriptions::New::POST
-    
+
         def post
           if options[:draft] and options[:file]
             if Mkmatter::Methods.check_if_jekyll
@@ -74,7 +75,7 @@ module Mkmatter
               answers     = Mkmatter::Answers.new(@questions, options[:publish])
               file_folder = '_drafts'
               filename    = [].concat([answers.slug_date, '-', answers.title.to_slug, '.', answers.file_format.downcase]).join
-          
+
               path = Pathname("./#{file_folder}/#{filename}").realdirpath
               if HILINE.agree('Would you like to put this page into a subdirectory?', true)
                 HILINE.say("What path? (directories will be created if they don't exist)")
@@ -105,7 +106,7 @@ module Mkmatter
               exit 1
             end
           elsif options[:file] and options[:draft].nil? or options[:draft] == false
-        
+
             if Mkmatter::Methods.check_if_jekyll
               @questions  = Mkmatter::Questions::Post.new(HILINE).ask
               answers     = Mkmatter::Answers.new(@questions, options[:publish])
@@ -137,7 +138,7 @@ module Mkmatter
                 fd.puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
                 fd.puts '---'
               end
-          
+
               Mkmatter::Methods.launch_editor(options[:editor], path)
             else
               puts "Not in a Jekyll directory. (no '_config.yml' in any parent directory)"
@@ -149,7 +150,7 @@ module Mkmatter
             puts ''
             puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
             puts '---'
-      
+
           end
         end
       end
