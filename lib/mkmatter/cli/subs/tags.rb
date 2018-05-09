@@ -12,7 +12,7 @@ module Mkmatter
         def find(type)
           if Mkmatter::Methods.check_if_jekyll
             table                      = Terminal::Table.new
-            table.title                = 'Tags'
+            table.title                = type.capitalize
             table.style.all_separators = true
             table.headings             = ["#{Paint['Path from Jekyll Root', 'white', :bold]}", "#{Paint['Tags', 'white', :bold]}"]
             
