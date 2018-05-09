@@ -8,7 +8,7 @@ module Mkmatter
     attr_accessor :slug_date, :answer_hash
     attr_accessor :published, :file_format
     attr_reader :matter
-    
+
     def initialize(question_hash, publish)
       @title       = question_hash[:title]
       @tags        = question_hash[:tags]
@@ -20,7 +20,7 @@ module Mkmatter
       @published   = publish
       @file_format = question_hash[:file_format]
       @matter      = {
-          layout:     @layout,
+          layout:     question_hash[:layout],
           title:      @title,
           categories: @categories,
           tags:       @tags,
@@ -28,18 +28,18 @@ module Mkmatter
       }
       @matter[:published] = @published if publish
     end
-    
+
     # @return [Hash] returns attribute `.matter`
     def to_h
       @matter
     end
-    
+
     # @param [Hash] hash other hash
     # @return [nil] merges hash into attribute `.matter`
     def to_h=(hash)
       @matter.merge!(hash)
     end
-    
+
     alias_method :inspect, :to_h
     #
     # Dumps all file applicable metadata to a provided output.
