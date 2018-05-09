@@ -124,8 +124,8 @@ module Minitest
 
         command = if defined?(Rails) && Rails.version >= '5.0.0'
                     %[bin/rails test #{location}:#{line}]
-                  else
                     %[rake TEST=#{location} TESTOPTS="--name=#{result.name}"]
+                  else
                   end
 
         str = "\n"
@@ -135,7 +135,7 @@ module Minitest
       end
 
       def find_test_file(result)
-        location, line = result.method(result.description).source_location
+        location, line = result.source_location
         location       = location.gsub(%r[^.*?/((?:test|spec)/.*?)$], "\\1")
 
         [location, line]
@@ -174,7 +174,7 @@ module Minitest
             "\u{203C}" => :red,
             "\u{26A1}" => :yellow
         }
-        io.print color(result_code, colors[result])
+        io.print color(result, colors[result])
       end
 
       def color(string, color = :default)
