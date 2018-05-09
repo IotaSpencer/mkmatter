@@ -1,3 +1,3 @@
 module Mkmatter
-  VERSION = '3.0.45'
+  VERSION = '3.1.0'
 end
