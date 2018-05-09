@@ -21,10 +21,10 @@ module Mkmatter
 
       # @return [OpenStruct]
       def ask
-        known_questions = self.methods.delete_if { |m| m.to_s !~ /^get_.*$/ }
+        known_questions = self.methods.sort.delete_if { |m| m.to_s !~ /^get_.*$/ }
         known_questions.each do |m|
           @answers[:layout] = 'post'
-          @answers[m.to_s.gsub(/^get_/, '')] = self.method(m).call(@highline_context)
+          @answers[m.to_s.gsub(/^get_[0-9]{3}_/, '')] = self.method(m).call(@highline_context)
         end
         @answers
       end
@@ -45,10 +45,10 @@ module Mkmatter
 
       # @return [OpenStruct]
       def ask
-        known_questions = self.methods.delete_if { |m| m.to_s !~ /^get_.*$/ }
+        known_questions = self.methods.sort.delete_if { |m| m.to_s !~ /^get_.*$/ }
         known_questions.each do |m|
           @answers[:layout] = 'page'
-          @answers[m.to_s.gsub(/^get_/, '')] = self.method(m).call(@highline_context)
+          @answers[m.to_s.gsub(/^get_[0-9]{3}_/, '')] = self.method(m).call(@highline_context)
         end
         @answers
       end

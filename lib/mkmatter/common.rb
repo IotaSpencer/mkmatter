@@ -6,7 +6,7 @@ module Mkmatter
     attr_accessor :time_zone
     # @param [HighLine] hl A highline context
     # @return [String]
-    def get_title(hl)
+    def get_001_title(hl)
       title = hl.ask 'Title: '
       if hl.agree("Would you like it 'titleized' (Title instead of title)? ", true)
         title.titleize
@@ -17,19 +17,19 @@ module Mkmatter
 
     # @param [HighLine] hl A highline context
     # @return [String]
-    def get_tags(hl)
+    def get_002_tags(hl)
       hl.ask 'Tags? (this would be a comma separated list.) ', -> (str) {str.split(',')}
     end
 
     # @param [HighLine] hl A highline context
     # @return [String]
-    def get_categories(hl)
+    def get_003_categories(hl)
       hl.ask 'Categories? (space separated list) ', -> (str) {str.split(' ')}
     end
 
     # @param [HighLine] hl A highline context
     # @return [String]
-    def get_time_zone(hl)
+    def get_004_time_zone(hl)
       custom   = nil
       timezone = hl.choose do |m|
         m.header = 'Time Zone? (select by number)'
@@ -62,7 +62,7 @@ module Mkmatter
 
     # @param [HighLine] hl A highline context
     # @return [String]
-    def get_file_format(hl)
+    def get_005_file_format(hl)
       hl.choose do |menu|
         menu.header = 'Choose whether you want HTML or Markdown'
         menu.choice 'html' do
