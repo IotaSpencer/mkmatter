@@ -4,8 +4,6 @@ require 'mkmatter/answers'
 require 'mkmatter/cli'
 require 'mkmatter/version'
 
-require 'json'
-require 'yaml'
 require 'active_support/all'
 # Main Module Declaration
 module Mkmatter
