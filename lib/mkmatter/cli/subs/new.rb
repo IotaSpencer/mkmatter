@@ -13,6 +13,7 @@ module Mkmatter
         HILINE = HighLine.new($stdin, $stderr, 40)
         option :publish, :type => :boolean
         option :file, :type => :boolean, :default => nil
+        option :index, :type => :boolean, :default => nil
         method_options %w( template -t ) => :boolean
         desc 'page [options]', 'make front matter (and possibly content) for a jekyll page'
         long_desc Mkmatter::App::Descriptions::New::PAGE
@@ -22,7 +23,12 @@ module Mkmatter
             if Mkmatter::Methods.check_if_jekyll
               @questions = Mkmatter::Questions::Page.new(HILINE).ask
               answers    = Mkmatter::Answers.new(@questions, options.fetch(:publish, nil))
-              filename   = answers.title.to_slug + '.' + answers.file_format.downcase
+              if options.fetch(:index, nil)
+                filename = 'index.' + answers.file_format.downcase
+              else
+                filename   = answers.title.to_slug + '.' + answers.file_format.downcase
+              end
+
               path       = Pathname("./#{filename}").realdirpath
               if HILINE.agree('Would you like to put this page into a subdirectory?', true)
                 HILINE.say("What path? (directories will be created if they don't exist) ")
