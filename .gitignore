@@ -11,3 +11,5 @@
 /vendor/
 *.gem
 pkg/
+/.project
+/Gemfile.lock
