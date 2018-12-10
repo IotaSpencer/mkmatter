@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   spec.executables << 'mkmatter'
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'highline', '~> 1.7'
+  spec.add_runtime_dependency 'highline', '>= 1.7', '< 3.0'
   spec.add_runtime_dependency 'activesupport', '~> 5.1'
   spec.add_runtime_dependency 'git', '~> 1.3'
   spec.add_runtime_dependency 'slugity', '~> 1.1'
