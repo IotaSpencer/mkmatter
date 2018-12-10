@@ -6,9 +6,8 @@ require 'active_support/all'
 require 'terminal-table'
 require 'os'
 require 'rbconfig'
-
+require 'mkmatter/version'
 require 'mkmatter/cli/subs'
-require 'mkmatter/gem_info'
 
 module Mkmatter
   module App
@@ -17,13 +16,13 @@ module Mkmatter
       HILINE = HighLine.new($stdin, $stderr, 80)
       map %w[--version -v] => :__print_version
       desc '--version, -v', 'Print the version'
-      
+
       # Prints version string
       # @return [NilClass] nil
       def __print_version
         puts Mkmatter::VERSION
       end
-      
+
       map %w[--debug -d] => :__debug
       desc '--debug, -d', 'Prints debug info about the script/gem'
       # Prints debug info
@@ -47,14 +46,14 @@ module Mkmatter
         table.title = 'mkmatter Debug Info'
         table.rows  = rows.to_a
         table.align_column(0, :left)
-        
+
         puts table
       end
-      
+
       map %w[--info -i] => :__print_info
       desc '--info, -i', 'Print script/gem info'
       method_option :'info-format', :type => :string, desc: 'The format of info', enum: %w(table yaml), default: 'table'
-      # @return nil
+      # @return [NilClass] Prints Gem info
       def __print_info
         format = options[:'info-format']
         rows   = {
@@ -71,7 +70,7 @@ module Mkmatter
             table.title           = 'mkmatter Info'
             table.rows            = rows.to_a
             table.align_column(0, :left)
-            
+
             puts table
           when 'yaml'
             puts rows.stringify_keys.to_yaml
@@ -82,10 +81,10 @@ module Mkmatter
             # enum parameter.
         end
       end
-      
+
       if Pathname(Dir.home).join('.local/bin/micro').exist?
         class_option(:editor, type: :string, default: "#{Dir.home}/.local/bin/micro")
-        
+
       elsif Methods.which('micro')
         class_option(:editor, type: :string, default: 'micro')
       else
