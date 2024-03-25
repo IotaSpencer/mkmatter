@@ -17,7 +17,7 @@
 ## Contact
 
 [![E-mail](https://img.shields.io/badge/Email-Me-green.svg?style=for-the-badge)](mailto:me@iotaspencer.me)
-[![Twitter Follow](https://img.shields.io/twitter/follow/IotaEcode.svg?label=Follow%20Me%20on%20Twitter&style=for-the-badge)](https://twitter.com/IotaEcode)
+[![Twitter Follow](https://img.shields.io/twitter/follow/IotaEcode.svg?label=Follow%20Me%20on%20Twitter&style=for-the-badge)](https://twitter.com/iotaspencer)
 
 [![Website](https://img.shields.io/website-up-down-green-red/https/iotaspencer.me.svg?label=My%20Site%20-%20IotaSpencer%2Eme&style=for-the-badge)](https://iotaspencer.me)
 

@@ -16,7 +16,7 @@ module Mkmatter
       end
     end
     
-    # @return [Pathname] path of current jekyll site source roo
+    # @return [Pathname] path of current jekyll site source root
     def Methods.get_jekyll_root
       if Methods.check_if_jekyll
         cwd = Pathname.new('.').realdirpath
