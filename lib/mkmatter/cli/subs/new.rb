@@ -12,7 +12,7 @@ module Mkmatter
         include Thor::Actions
         HILINE = HighLine.new($stdin, $stderr, 40)
         option :publish, :type => :boolean
-        option :file, :type => :boolean, :default => nil
+        option :file, :type => :boolean, :default => true
         option :index, :type => :boolean, :default => nil
         method_options %w( template -t ) => :boolean
         desc 'page [options]', 'make front matter (and possibly content) for a jekyll page'
@@ -33,7 +33,7 @@ module Mkmatter
               if HILINE.agree('Would you like to put this page into a subdirectory?', true)
                 HILINE.say("What path? (directories will be created if they don't exist) ")
                 HILINE.say("Don't use a path starting with a slash, just put a relative path.")
-                HILINE.say('good => path/to/dir ‖ bad => /root/paths/are/bad/mmkay')
+                HILINE.say('good => path/to/dir ‖ bad => /absolute/paths/are/bad/mmkay')
                 folder = HILINE.ask('? ') do |q|
                   q.confirm  = true
                   q.default  = '.'
@@ -69,7 +69,7 @@ module Mkmatter
 
 
         option :publish, :type => :boolean
-        option :file, :type => :boolean, :default => nil
+        option :file, :type => :boolean, :default => true
         option :draft, :type => :boolean, :default => nil
         desc 'post [options]', 'make front matter (and possibly content) for a jekyll post'
         long_desc Mkmatter::App::Descriptions::New::POST
@@ -86,7 +86,7 @@ module Mkmatter
               if HILINE.agree('Would you like to put this page into a subdirectory?', true)
                 HILINE.say("What path? (directories will be created if they don't exist)")
                 HILINE.say("Don't use a path starting with a slash, just put a relative path.")
-                HILINE.say("<% Paint['Good', 'green', :bold] %>: path/to/dir ‖ <%= color('Bad', 'red', :bold) %>: /root/paths/are/bad/mmkay")
+                HILINE.say("<% Paint['Good', 'green', :bold] %>: path/to/dir ‖ <%= color('Bad', 'red', :bold) %>: /absolute/paths/are/bad/mmkay")
                 folder = HILINE.ask('? ') do |q|
                   q.confirm  = true
                   q.default  = '.'

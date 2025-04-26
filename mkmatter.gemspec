@@ -48,7 +48,12 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'micro_install', '~> 0.4.0'
   spec.add_development_dependency 'bundler', '~> 2.3.5'
   spec.add_development_dependency 'minitest', '~> 5'
+  spec.add_development_dependency 'rspec-core', '~> 3.13'
+  spec.add_development_dependency 'rspec-expectations', '~> 3.13'
+  spec.add_development_dependency 'rspec-mocks', '~> 3.13'
   spec.add_development_dependency 'minitest-reporters', '~> 1.6.1'
+  spec.add_development_dependency 'aruba', '~> 2.2.0'
+  spec.add_development_dependency 'highline-test', '~> 0.0.1'
   spec.post_install_message = [
       "Thanks for installing 'mkmatter', It means a lot to me.",
       "If you'd like to install 'micro', a text editor bundled with 'mkmatter'.",
