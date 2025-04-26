@@ -102,7 +102,32 @@ module Mkmatter
           menu.prompt = '? '
         end
       end
-
+      # @return [String]
+      def get_006_extra_fields
+        hl = @hl
+        custom_fields = nil
+        if hl.agree('Do you want to add custom fields? (usable as {{LAYOUT_TYPE.FIELD}} in templates) ', true)
+          hl.say('Your fields should be inputted as FIELD=>TEXT HERE')
+          hl.say("Type 'EOL' on a new line then press Enter when you are done.")
+          hl.say("<% HighLine.color('NOTE', :bold, :red) %>: Input is <% HighLine.color('NOT', :bold, :red) %> evaluated!")
+          custom_fields = hl.ask('Fields?') do |q|
+            q.gather = /^EOL$/
+          end
+        end
+        if custom_fields
+          fields = Hash.new
+          custom_fields.each do |field|
+            field = field.split(/=>/)
+            fields.store(field[0].to_s, field[1])
+          end
+          self.to_h = fields
+        elsif custom_fields.nil?
+          hl.say('No extra fields were added.')
+          return
+        else
+        end
+        custom_fields
+      end
       # @return [OpenStruct]
     end
 
@@ -186,7 +211,32 @@ module Mkmatter
           menu.prompt = '? '
         end
       end
-
+      # @return [Array[Hash]]
+      def get_006_extra_fields
+        hl = @hl
+        custom_fields = nil
+        if hl.agree('Do you want to add custom fields? (usable as {{LAYOUT_TYPE.FIELD}} in templates) ', true)
+          hl.say('Your fields should be inputted as FIELD=>TEXT HERE')
+          hl.say("Type 'EOL' on a new line then press Enter when you are done.")
+          hl.say("<% HighLine.color('NOTE', :bold, :red) %>: Input is <% HighLine.color('NOT', :bold, :red) %> evaluated!")
+          custom_fields = hl.ask('Fields?') do |q|
+            q.gather = /^EOL$/
+          end
+        end
+        if custom_fields
+          fields = Hash.new
+          custom_fields.each do |field|
+            field = field.split(/=>/)
+            fields.store(field[0].to_s, field[1])
+          end
+          self.to_h = fields
+        elsif custom_fields.nil?
+          hl.say('No extra fields were added.')
+          return
+        else
+        end
+        custom_fields
+      end
       # @return [OpenStruct]
     end
   end
