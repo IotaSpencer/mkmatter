@@ -50,7 +50,7 @@ module Mkmatter
       # Custom matter
       if hl.agree('Do you want to add custom fields? (usable as {{LAYOUT_TYPE.FIELD}} in templates) ', true)
         hl.say('Your fields should be inputted as FIELD=>TEXT HERE')
-        hl.say("Enter 'EOL' on a new line and press enter when you are done.")
+        hl.say("Type 'EOL' on a new line then press Enter when you are done.")
         hl.say("<% HighLine.color('NOTE', :bold, :red) %>: Input is <% HighLine.color('NOT', :bold, :red) %> evaluated!")
         custom_fields = hl.ask('Fields?') do |q|
           q.gather = /^EOL$/
