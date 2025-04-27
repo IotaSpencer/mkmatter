@@ -42,7 +42,7 @@ module Mkmatter
                         'under windows' => OS::Underlying.windows?,
                         'under bsd'     => OS::Underlying.bsd?,
                     })
-        table       = Terminal::Table.new
+        table       = ::Terminal::Table.new
         table.title = 'mkmatter Debug Info'
         table.rows  = rows.to_a
         table.align_column(0, :left)
@@ -65,7 +65,7 @@ module Mkmatter
         }
         case format
           when 'table'
-            table                 = Terminal::Table.new
+            table                 = ::Terminal::Table.new
             table.style.alignment = :center
             table.title           = 'mkmatter Info'
             table.rows            = rows.to_a

@@ -1,0 +1,9 @@
+module Mkmatter
+  module Questions
+    class Post
+      @hl: untyped
+
+      def get_002_tags: -> untyped
+    end
+  end
+end
