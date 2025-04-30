@@ -1,5 +1,5 @@
 module Mkmatter
-  VERSION = '3.1.9'
+  VERSION = '3.1.11'
 
   # Return gem information for certain commands and options
   class GemInfo
