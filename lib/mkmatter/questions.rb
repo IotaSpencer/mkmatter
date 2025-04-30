@@ -15,6 +15,7 @@ module Mkmatter
     class Post
       attr :answers
       attr :extra_fields
+      @extra_fields = nil
       @hl = HighLine.new
 
       def ask
@@ -130,15 +131,25 @@ module Mkmatter
       end
       # @return [OpenStruct]
     end
-
     class Page
       attr :answers
+      attr :extra_fields
+      @extra_fields = nil
       @hl = HighLine.new
+
+      def ask
+        known_questions = methods.sort.delete_if { |m| m.to_s !~ /^get_.*$/ }
+        known_questions.each do |m|
+          @answers[:layout] = 'page'
+          @answers[m.to_s.gsub(/^get_[0-9]{3}_/, '')] = method(m).call
+        end
+        @answers
+      end
 
       # @!visibility private
       def initialize
         @answers = OpenStruct.new
-
+        @hl = HighLine.new
       end
 
       def get_001_title
@@ -162,7 +173,7 @@ module Mkmatter
       # @return [Array]
       def get_003_categories
         hl = @hl
-        hl.ask("Categories? (write one on each line, then type  '.') ") do |q|
+        hl.ask("Categories? (write one on each line, then type '.') ") do |q|
           q.gather = '.'
         end
       end
@@ -211,7 +222,7 @@ module Mkmatter
           menu.prompt = '? '
         end
       end
-      # @return [Array[Hash]]
+      # @return [String]
       def get_006_extra_fields
         hl = @hl
         custom_fields = nil
