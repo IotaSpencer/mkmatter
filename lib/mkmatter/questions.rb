@@ -14,7 +14,7 @@ module Mkmatter
 
     class Post
       attr :answers
-
+      attr :extra_fields
       @hl = HighLine.new
 
       def ask
@@ -120,7 +120,7 @@ module Mkmatter
             field = field.split(/=>/)
             fields.store(field[0].to_s, field[1])
           end
-          self.to_h = fields
+          self.extra_fields = fields
         elsif custom_fields.nil?
           hl.say('No extra fields were added.')
           return
@@ -229,7 +229,7 @@ module Mkmatter
             field = field.split(/=>/)
             fields.store(field[0].to_s, field[1])
           end
-          self.to_h = fields
+          self.extra_fields = fields
         elsif custom_fields.nil?
           hl.say('No extra fields were added.')
           return
