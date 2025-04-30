@@ -77,7 +77,8 @@ module Mkmatter
         def post
           if options[:draft] and options[:file]
             if Mkmatter::Methods.check_if_jekyll
-              @questions  = Mkmatter::Questions::Post.new(HILINE).ask
+              # @questions = Mkmatter::Questions::Post.new(HILINE).ask
+              @questions  = Mkmatter::Questions::Post.new.ask
               answers     = Mkmatter::Answers.new(@questions, options[:publish])
               file_folder = '_drafts'
               filename    = [].concat([answers.slug_date, '-', answers.title.to_slug, '.', answers.file_format.downcase]).join
@@ -114,7 +115,8 @@ module Mkmatter
           elsif options[:file] and options[:draft].nil? or options[:draft] == false
 
             if Mkmatter::Methods.check_if_jekyll
-              @questions  = Mkmatter::Questions::Post.new(HILINE).ask
+              # @questions  = Mkmatter::Questions::Post.new(HILINE).ask
+              @questions = Mkmatter::Questions::Post.new.ask
               answers     = Mkmatter::Answers.new(@questions, options[:publish])
               file_folder = '_posts'
               filename    = [].concat([answers.slug_date, '-', answers.title.to_slug, '.', answers.file_format.downcase]).join('')
@@ -151,7 +153,8 @@ module Mkmatter
               exit 1
             end
           elsif options[:draft].nil? and options[:file].nil?
-            @questions = Mkmatter::Questions::Post.new(HILINE).ask
+            @questions = Mkmatter::Questions::Post.new.ask
+            # @questions = Mkmatter::Questions::Post.new(HILINE).ask
             answers    = Mkmatter::Answers.new(@questions, options[:publish])
             puts ''
             puts answers.to_h.stringify_keys.to_yaml(indentation: 2)
