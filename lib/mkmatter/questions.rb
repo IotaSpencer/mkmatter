@@ -1,5 +1,4 @@
 require 'highline'
-require 'highline/color'
 require 'ostruct'
 module Mkmatter
   module Questions
