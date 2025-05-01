@@ -108,7 +108,7 @@ module Mkmatter
     end
   end
 end
-elsif options[:draft].nil? or options[:draft] == false
+# elsif options[:draft].nil? or options[:draft] == false
 
   #   if Mkmatter::Methods.check_if_jekyll
   #     # @questions  = Mkmatter::Questions::Post.new(HILINE).ask
