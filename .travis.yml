@@ -1,0 +1,10 @@
+language: ruby
+bundler_args: --jobs=6 --retry=3 --standalone
+rvm:
+  - 2.3.4
+  - 2.4.1
+  - 2.5.3
+  - 3.0.2
+script:
+  - echo "Running tests against $(ruby -v) ..."
+  - bundle exec rake -t

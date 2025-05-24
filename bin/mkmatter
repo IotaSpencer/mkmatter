@@ -1,0 +1,8 @@
+#!/usr/bin/ruby
+require 'mkmatter'
+Signal.trap('INT') do
+  $stderr.puts
+  $stderr.puts 'Got INT.. Exiting'
+  exit 0
+end
+Mkmatter::App::Runner.new(ARGV).execute!

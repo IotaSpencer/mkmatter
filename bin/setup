@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+
+bundle install
+if [ $1 = "micro" ]; then
+    bundle exec micro-install
+fi

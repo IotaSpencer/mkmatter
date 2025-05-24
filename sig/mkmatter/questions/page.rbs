@@ -1,0 +1,8 @@
+module Mkmatter
+  module Questions
+    class Page
+      @answers: untyped
+      @hl: untyped
+    end
+  end
+end

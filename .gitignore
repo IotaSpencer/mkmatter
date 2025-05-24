@@ -1,0 +1,16 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+/.idea/
+/.vscode/
+/vendor/
+*.gem
+pkg/
+/.project
+/Gemfile.lock
+.project
