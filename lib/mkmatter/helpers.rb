@@ -85,5 +85,5 @@ def get_time_zone_full(time_object)
   else
     raise ArgumentError, "Invalid time zone offset format: #{offset}"
   end
-  puts "Offset: #{offset}"
+  # puts "Offset: #{offset}"
 end
