@@ -45,14 +45,12 @@ module Mkmatter
     def initialize
       @answers = OpenStruct.new
       @hl = HighLine.new
-      @errhl = HighLine.new(input = $stdin, output = $stderr)
     end
 
     def get_001_title
       hl = @hl
-      errhl = @errhl
       title = hl.ask "Title: "
-      if errhl.agree("Would you like it 'titleized' (Title instead of title)? ", true)
+      if hl.agree("Would you like it 'titleized' (Title instead of title)? ", true)
         title.titleize
       else
         title
@@ -62,7 +60,6 @@ module Mkmatter
     # @return [Array]
     def get_002_tags
       hl = @hl
-      errhl = @errhl
       hl.ask("Tags? (write one on each line, then press '.' then press 'Enter')") do |q|
         q.gather = '.'
       end
@@ -71,7 +68,6 @@ module Mkmatter
     # @return [Array]
     def get_003_categories
       hl = @hl
-      errhl = @errhl
       hl.ask("Categories? (write one on each line, then press '.' then press 'Enter')") do |q|
         q.gather = '.'
       end
@@ -80,8 +76,7 @@ module Mkmatter
     # @return [String]
     def get_004_file_format
       hl = @hl
-      errhl = @errhl
-      errhl.choose do |menu|
+      hl.choose do |menu|
         menu.header = "Choose whether you want HTML or Markdown"
         menu.choice "html" do
           return "html"
@@ -96,12 +91,11 @@ module Mkmatter
     # @return [String]
     def get_005_extra_fields
       hl = @hl
-      errhl = @errhl
-      fields = nil
+      fields = {}
       custom_fields = nil
       cfh = nil
       if hl.agree("Do you want to add custom fields? ", true)
-        errhl.say(<<~EXTRA_FIELDS)
+        hl.say(<<~EXTRA_FIELDS)
         These fields will be usable as {{LAYOUT_TYPE.FIELD}} in pages/posts etc.
         Your fields should be inputted as FIELD=>TEXT HERE
         Type 'EOL' on a new line then press Enter when you are done.
@@ -112,16 +106,16 @@ module Mkmatter
         end
       end
       if !custom_fields.empty?
-        fields = Hash.new()
         custom_fields.each do |field|
-          fields.store(field, nil)
+          fields.store(field.to_sym, 'nil')
         end
       end        
       if custom_fields.empty?
         hl.say("No extra fields were added.")
         return
       else
-        cfh = hl.ask("Value of field '#{@key}'?") do |q|
+        hl.say("#{fields} #{fields.class}")
+        cfh = hl.ask("Value of field '<%= key %>'?") do |q|
           q.gather = fields
         end
       end
