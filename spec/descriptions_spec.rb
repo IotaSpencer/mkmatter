@@ -9,10 +9,8 @@ RSpec.describe "DescriptionsSpec" do
   after do
     # Teardown something
   end
-  it "outputs help for new post" do
-    expect { @app.start(%w(new help post)) }.to output(/mkmatter new post/).to_stdout
-  end
-  it 'outputs help for new page' do
-  expect { @app.start(%w(new help page)) }.to output(/mkmatter new page/).to_stdout
+
+  it 'outputs help for new' do
+    expect { @app.start(%w(help new)) }.to output(/Usage:\n  (rspec|mkmatter) new \[options\].*/).to_stdout
   end
 end

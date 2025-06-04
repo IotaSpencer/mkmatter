@@ -2,6 +2,7 @@
 require 'rspec/core'
 require 'rspec/expectations'
 require 'rspec/mocks'
+require 'cancun'
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.syntax = [:expect]

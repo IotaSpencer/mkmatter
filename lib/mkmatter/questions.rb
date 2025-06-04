@@ -1,250 +1,149 @@
-require 'highline'
-require 'ostruct'
-module Mkmatter
-  module Questions
-    def self.ask(cls)
+require "highline"
+require "ostruct"
 
-      known_questions = const_get(cls).methods.sort.delete_if { |m| m.to_s !~ /^get_.*$/ }
+module Mkmatter
+  class Questions
+    attr :answers
+    @hl = HighLine.new
+    # def self.ask(cls)
+    #   known_questions = const_get(cls).methods.sort.delete_if { |m| m.to_s !~ /^get_.*$/ }
+    #   known_questions.each do |m|
+    #     @answers[:layout] = cls.to_s.lower
+    #     @answers[m.to_s.gsub(/^get_[0-9]{3}_/, "")] = method(m).call
+    #   end
+    #   @answers
+    # end
+
+    def ask(type, include_post_qs)
+      known_questions = methods.sort.delete_if { |m| m.to_s !~ /^get_.*$/ }
+      if type != "post"
+        if include_post_qs
+        else
+          post_only_questions = [
+            :get_002_tags,
+            :get_003_categories,
+            :get_006_summary,
+          ]
+          2.times do
+            for q in known_questions
+              if post_only_questions.include?(q)
+                known_questions.delete(q)
+              end
+            end
+          end
+        end
+        # puts known_questions
+      end
       known_questions.each do |m|
-        @answers[:layout] = cls.to_s.lower
-        @answers[m.to_s.gsub(/^get_[0-9]{3}_/, '')] = method(m).call
+        @answers[:layout] = type
+        @answers[m.to_s.gsub(/^get_[0-9]{3}_/, "")] = method(m).call
       end
       @answers
     end
 
-    class Post
-      attr :answers
+    # @!visibility private
+    def initialize
+      @answers = OpenStruct.new
       @hl = HighLine.new
-
-      def ask
-        known_questions = methods.sort.delete_if { |m| m.to_s !~ /^get_.*$/ }
-        known_questions.each do |m|
-          @answers[:layout] = 'post'
-          @answers[m.to_s.gsub(/^get_[0-9]{3}_/, '')] = method(m).call
-        end
-        @answers
-      end
-
-      # @!visibility private
-      def initialize
-        @answers = OpenStruct.new
-        @hl = HighLine.new
-      end
-
-      def get_001_title
-        hl = @hl
-        title = hl.ask 'Title: '
-        if hl.agree("Would you like it 'titleized' (Title instead of title)? ")
-          title.titleize
-        else
-          title
-        end
-      end
-
-      # @return [Array]
-      def get_002_tags
-        hl = @hl
-        hl.ask("Tags? (write one on each line, then type '.') ") do |q|
-          q.gather = '.'
-        end
-      end
-
-      # @return [Array]
-      def get_003_categories
-        hl = @hl
-        hl.ask("Categories? (write one on each line, then type '.') ") do |q|
-          q.gather = '.'
-        end
-      end
-
-      # @return [String]
-      def get_004_time_zone
-        hl = @hl
-        custom = nil
-        timezone = hl.choose do |m|
-          m.header = 'Time Zone? (select by number)'
-          m.choice('Eastern Time (US & Canada)') do
-            return 'Eastern Time (US & Canada)'
-          end
-          m.choice('Central Time (US & Canada)') do
-            return 'Central Time (US & Canada)'
-          end
-          m.choice :neither
-          m.prompt = '? '
-        end
-        custom = hl.ask('Other Time Zone: ', String) if timezone == :neither
-        return unless custom
-
-        hl.say('Checking TimeZone Validity')
-        print '.'
-        sleep(0.05)
-        5.times do
-          print '.'
-          sleep(0.05)
-          puts ''
-          TimeZone.find_tzinfo custom
-        end
-        custom
-      end
-
-      # @return [String]
-      def get_005_file_format
-        hl = @hl
-        hl.choose do |menu|
-          menu.header = 'Choose whether you want HTML or Markdown'
-          menu.choice 'html' do
-            return 'html'
-          end
-          menu.choice 'md' do
-            return 'md'
-          end
-          menu.prompt = '? '
-        end
-      end
-      # @return [String]
-      def get_006_extra_fields
-        hl = @hl
-        custom_fields = nil
-        if hl.agree('Do you want to add custom fields? (usable as {{LAYOUT_TYPE.FIELD}} in templates) ', true)
-          hl.say('Your fields should be inputted as FIELD=>TEXT HERE')
-          hl.say("Type 'EOL' on a new line then press Enter when you are done.")
-          hl.say("<% color('NOTE', :bold, :red) %>: Input is <% color('NOT', :bold, :red) %> evaluated!")
-          custom_fields = hl.ask('Fields?') do |q|
-            q.gather = /^EOL$/
-          end
-        end
-        if custom_fields
-          fields = Hash.new
-          custom_fields.each do |field|
-            field = field.split(/=>/)
-            fields.store(field[0].to_s, field[1])
-          end
-          
-        elsif custom_fields.nil?
-          hl.say('No extra fields were added.')
-          return
-        else
-        end
-        custom_fields
-      end
-      # @return [OpenStruct]
+      @errhl = HighLine.new(input = $stdin, output = $stderr)
     end
-    class Page
-      attr :answers
-      @hl = HighLine.new
 
-      def ask
-        known_questions = methods.sort.delete_if { |m| m.to_s !~ /^get_.*$/ }
-        known_questions.each do |m|
-          @answers[:layout] = 'page'
-          @answers[m.to_s.gsub(/^get_[0-9]{3}_/, '')] = method(m).call
+    def get_001_title
+      hl = @hl
+      errhl = @errhl
+      title = hl.ask "Title: "
+      if errhl.agree("Would you like it 'titleized' (Title instead of title)? ", true)
+        title.titleize
+      else
+        title
+      end
+    end
+
+    # @return [Array]
+    def get_002_tags
+      hl = @hl
+      errhl = @errhl
+      hl.ask("Tags? (write one on each line, then press '.' then press 'Enter')") do |q|
+        q.gather = '.'
+      end
+    end
+
+    # @return [Array]
+    def get_003_categories
+      hl = @hl
+      errhl = @errhl
+      hl.ask("Categories? (write one on each line, then press '.' then press 'Enter')") do |q|
+        q.gather = '.'
+      end
+    end
+
+    # @return [String]
+    def get_004_file_format
+      hl = @hl
+      errhl = @errhl
+      errhl.choose do |menu|
+        menu.header = "Choose whether you want HTML or Markdown"
+        menu.choice "html" do
+          return "html"
         end
-        @answers
-      end
-
-      # @!visibility private
-      def initialize
-        @answers = OpenStruct.new
-        @hl = HighLine.new
-      end
-
-      def get_001_title
-        hl = @hl
-        title = hl.ask 'Title: '
-        if hl.agree("Would you like it 'titleized' (Title instead of title)? ")
-          title.titleize
-        else
-          title
+        menu.choice "md" do
+          return "md"
         end
+        menu.prompt = "? "
       end
+    end
 
-      # @return [Array]
-      def get_002_tags
-        hl = @hl
-        hl.ask("Tags? (write one on each line, then type '.') ") do |q|
+    # @return [String]
+    def get_005_extra_fields
+      hl = @hl
+      errhl = @errhl
+      fields = nil
+      custom_fields = nil
+      cfh = nil
+      if hl.agree("Do you want to add custom fields? ", true)
+        errhl.say(<<~EXTRA_FIELDS)
+        These fields will be usable as {{LAYOUT_TYPE.FIELD}} in pages/posts etc.
+        Your fields should be inputted as FIELD=>TEXT HERE
+        Type 'EOL' on a new line then press Enter when you are done.
+        <%= color('NOTE', :bold, RED) %>: Input is <%= color('NOT', :bold, RED) %> evaluated!
+        EXTRA_FIELDS
+        custom_fields = hl.ask("Fields?") do |q|
           q.gather = '.'
         end
       end
-
-      # @return [Array]
-      def get_003_categories
-        hl = @hl
-        hl.ask("Categories? (write one on each line, then type '.') ") do |q|
-          q.gather = '.'
+      if !custom_fields.empty?
+        fields = Hash.new()
+        custom_fields.each do |field|
+          fields.store(field, nil)
+        end
+      end        
+      if custom_fields.empty?
+        hl.say("No extra fields were added.")
+        return
+      else
+        cfh = hl.ask("Value of field '#{@key}'?") do |q|
+          q.gather = fields
         end
       end
+      cfh
+    end
 
-      # @return [String]
-      def get_004_time_zone
-        hl = @hl
-        custom = nil
-        timezone = hl.choose do |m|
-          m.header = 'Time Zone? (select by number)'
-          m.choice('Eastern Time (US & Canada)') do
-            return 'Eastern Time (US & Canada)'
-          end
-          m.choice('Central Time (US & Canada)') do
-            return 'Central Time (US & Canada)'
-          end
-          m.choice :neither
-          m.prompt = '? '
-        end
-        custom = hl.ask('Other Time Zone: ', String) if timezone == :neither
-        return unless custom
-
-        hl.say('Checking TimeZone Validity')
-        print '.'
-        sleep(0.05)
-        5.times do
-          print '.'
-          sleep(0.05)
-          puts ''
-          TimeZone.find_tzinfo custom
-        end
-        custom
-      end
-
-      # @return [String]
-      def get_005_file_format
-        hl = @hl
-        hl.choose do |menu|
-          menu.header = 'Choose whether you want HTML or Markdown'
-          menu.choice 'html' do
-            return 'html'
-          end
-          menu.choice 'md' do
-            return 'md'
-          end
-          menu.prompt = '? '
+    # @return [OpenStruct]
+    def get_006_summary
+      hl = @hl
+      summary = nil
+      summary_if = hl.agree("Summary? ", true)
+      if summary_if
+        summary = hl.ask(<<~SUMMARYDOC) do |q|
+          Input a summary of the post.
+          This will be outputted as a summary in the front matter.
+          This is useful for a post that is long and you want to
+          show a summary of the post.
+        SUMMARYDOC
+          q.gather = "."
         end
       end
-      # @return [String]
-      def get_006_extra_fields
-        hl = @hl
-        custom_fields = nil
-        if hl.agree('Do you want to add custom fields? (usable as {{LAYOUT_TYPE.FIELD}} in templates) ', true)
-          hl.say('Your fields should be inputted as FIELD=>TEXT HERE')
-          hl.say("Type 'EOL' on a new line then press Enter when you are done.")
-          hl.say("<% HighLine.color('NOTE', :bold, :red) %>: Input is <% HighLine.color('NOT', :bold, :red) %> evaluated!")
-          custom_fields = hl.ask('Fields?') do |q|
-            q.gather = /^EOL$/
-          end
-        end
-        if custom_fields
-          fields = Hash.new
-          custom_fields.each do |field|
-            field = field.split(/=>/)
-            fields.store(field[0].to_s, field[1])
-          end
-          self.extra_fields = fields
-        elsif custom_fields.nil?
-          hl.say('No extra fields were added.')
-          return
-        else
-        end
-        custom_fields
-      end
-      # @return [OpenStruct]
+      summary.join("\n")
     end
   end
 end

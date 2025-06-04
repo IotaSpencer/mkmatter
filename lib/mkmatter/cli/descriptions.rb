@@ -1,21 +1,17 @@
-require 'highline'
-require 'paint'
+require "highline"
+require "paint"
 HighLine.colorize_strings
 
 module Mkmatter
   module App
     module Descriptions
       module New
-        PAGE = ERB.new(<<-PAGE
-        --`mkmatter new page` will run you through making a jekyll page.
-        --Given the above options/flags you can modify how the script
+        NEW = ERB.new(<<-NEW
+        --`mkmatter new --type=page` will run you through making a jekyll page.
+        --Given the above options/flags you can either output the 'front matter'
+        --to STDOUT, or to a file. 
         --outputs your front matter, or whether to mark it as published.
-        --<%= Paint['OPTIONS', 'green', :bold] %>:
-
-        PAGE
-        ).result
-
-        POST = ERB.new(<<-POSTDOC
+        
         --`mkmatter new post` will run you through making a jekyll post.
         --Given the above options/flags you can modify how the script
         --outputs your front matter, and whether to mark it as published,
@@ -26,7 +22,16 @@ module Mkmatter
         ----so you have to explicitly use --no-publish to set 
         ----`<%= HighLine.color('published', :yellow) %>: <%= HighLine.color('false', :yellow, :bold) %>`
 
-        POSTDOC
+        --`mkmatter new --type=LAYOUT_TYPE` will run you through making a page using a custom
+        --layout type. This is useful for making a page that is not a post or a page. 
+        --
+        --Examples of this include:
+        ----A bulma-clean-theme showcase page (--type=showcase)
+        ----A bulma-clean-theme recipe page (--type=recipe)
+        ----A bulma-clean-theme products page (--type=products)
+        --<%= Paint['OPTIONS', 'green', :bold] %>:
+
+        NEW
         ).result
       end
 
