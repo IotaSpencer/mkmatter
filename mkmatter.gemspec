@@ -48,9 +48,11 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rake', '13.2.1'
   spec.add_runtime_dependency 'micro_install', '~> 0.4.1'
   spec.add_development_dependency 'bundler', '~> 2.6.9'
+  spec.add_development_dependency 'cancun', '~> 0.2.2'
   spec.add_development_dependency 'bump', '~> 0.10.0'
   spec.add_development_dependency 'minitest', '~> 5'
   spec.add_development_dependency 'minitest-reporters', '~> 1.6.1'
+  spec.add_development_dependency 'rspec', '~> 3.13.1'
   spec.post_install_message = [
       "Thanks for installing 'mkmatter', It means a lot to me.",
       "If you'd like to install 'micro', a text editor bundled with 'mkmatter'.",
