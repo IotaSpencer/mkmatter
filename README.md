@@ -1,5 +1,7 @@
 # mkmatter
 
+<img src="https://uploads.iotaspencer.me/mkmatter_logo_3_face_2.png" width="200px" height="200px">
+
 [![Gem](https://img.shields.io/gem/v/mkmatter.svg?style=for-the-badge)](https://rubygems.org/gems/mkmatter)
 [![GitHub tag](https://img.shields.io/github/tag/IotaSpencer/mkmatter.svg?style=for-the-badge)](https://github.com/IotaSpencer/mkmatter/tree/)
 
