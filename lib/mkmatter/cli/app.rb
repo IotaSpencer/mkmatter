@@ -14,7 +14,7 @@ module Mkmatter
   module App
     class CLI < Thor
       # \(see {http://www.rubydoc.info/gems/highline/HighLine#initialize-instance_method HighLine#new}\)
-      HILINE = HighLine.new($stdin, $stderr, 80)
+      
       map %w[--version -v] => :__print_version
       desc "--version, -v", "Print the version"
       package_name "mkmatter"
@@ -86,7 +86,7 @@ module Mkmatter
 
       option :publish, :type => :boolean
       option :index, :type => :boolean, :default => nil
-      option :type, :type => :string, :default => "page"
+      option :type, :type => :string, :default => "post"
       option :draft, :type => :boolean, :default => nil
       option :'include-post-qs', :type => :boolean, :default => false,
         desc: "Include post questions in the prompt"
