@@ -13,6 +13,11 @@
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com)
 
+### Coding Activity
+
+[![wakatime](https://wakatime.com/badge/user/5ce38313-6fca-4c1e-b156-14447557e40f/project/339be810-d008-4a2a-8436-fe8675241c36.svg)](https://wakatime.com/badge/user/5ce38313-6fca-4c1e-b156-14447557e40f/project/339be810-d008-4a2a-8436-fe8675241c36)
+
+
 ## Contact
 
 If you install `mkmatter` Please let me know, I'd love to know the people using this!
@@ -20,7 +25,7 @@ If you install `mkmatter` Please let me know, I'd love to know the people using 
 [![E-mail](https://img.shields.io/badge/Email-Me-green.svg?style=for-the-badge)](mailto:me@iotaspencer.me)
 [![Twitter Follow](https://img.shields.io/twitter/follow/KenISpencer.svg?label=Follow%20Me%20on%20Twitter&style=for-the-badge)](https://twitter.com/KenISpencer)
 [![Website](https://img.shields.io/website-up-down-green-red/https/iotaspencer.me.svg?label=My%20Site%20-%20IotaSpencer%2Eme&style=for-the-badge)](https://iotaspencer.me)
-[![E-mail](https://img.shields.io/badge/mkmatter%20on%20IotaSpencer%2eme-Project-green.svg?style=for-the-badge)](https://iotaspencer.me/projects/mkmatter)
+
 
 ## About mkmatter
 
