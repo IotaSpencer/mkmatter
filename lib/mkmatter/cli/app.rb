@@ -84,10 +84,8 @@ module Mkmatter
         end
       end
 
-      option :publish, :type => :boolean
       option :index, :type => :boolean, :default => nil
       option :type, :type => :string, :default => "post"
-      option :draft, :type => :boolean, :default => nil
       option :'include-post-qs', :type => :boolean, :default => false,
         desc: "Include post questions in the prompt"
       option :'dry-run', :type => :boolean, :default => false
