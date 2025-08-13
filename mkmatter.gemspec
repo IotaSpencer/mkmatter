@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'front_matter_parser', '~> 1.0.1'
   spec.add_runtime_dependency 'git', '~> 3.1.0'
   spec.add_runtime_dependency 'highline', '~> 3.1.2'
-  spec.add_runtime_dependency 'micro_install', '~> 0.4.1'
+  spec.add_runtime_dependency 'micro_install', '~> 0.4.2'
   spec.add_runtime_dependency 'os', '~> 1.1.4'
   spec.add_runtime_dependency 'paint', '~> 2.3.0'
   spec.add_runtime_dependency 'rake', '13.2.1'
