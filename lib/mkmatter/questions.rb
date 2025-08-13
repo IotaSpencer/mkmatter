@@ -1,18 +1,12 @@
-require "highline"
-require "ostruct"
+# frozen_string_literal: true
+
+require 'highline'
 
 module Mkmatter
   class Questions
     attr :answers
-    @hl = HighLine.new
-    # def self.ask(cls)
-    #   known_questions = const_get(cls).methods.sort.delete_if { |m| m.to_s !~ /^get_.*$/ }
-    #   known_questions.each do |m|
-    #     @answers[:layout] = cls.to_s.lower
-    #     @answers[m.to_s.gsub(/^get_[0-9]{3}_/, "")] = method(m).call
-    #   end
-    #   @answers
-    # end
+
+    @@hl = HighLine.new
 
     def ask(type, include_post_qs)
       known_questions = methods.sort.delete_if { |m| m.to_s !~ /^get_.*$/ }
@@ -36,21 +30,19 @@ module Mkmatter
       end
       known_questions.each do |m|
         @answers[:layout] = type
-        @answers[m.to_s.gsub(/^get_[0-9]{3}_/, "")] = method(m).call
+        @answers[m.to_s.gsub(/^get_[0-9]{3}_/, '')] = method(m).call
       end
       @answers
     end
 
     # @!visibility private
     def initialize
-      @answers = OpenStruct.new
-      @hl = HighLine.new
+      @answers = {}
     end
 
     def get_001_title
-      hl = @hl
-      title = hl.ask "Title: "
-      if hl.agree("Would you like it 'titleized' (Title instead of title)? ", true)
+      title = @@hl.ask 'Title: '
+      if @@hl.agree("Would you like it 'titleized' (Title instead of title)? ", true)
         title.titleize
       else
         title
@@ -59,24 +51,21 @@ module Mkmatter
 
     # @return [Array]
     def get_002_tags
-      hl = @hl
-      hl.ask("Tags? (write one on each line, then press '.' then press 'Enter')") do |q|
+      @@hl.ask("Tags? (write one on each line, then press '.' then press 'Enter')") do |q|
         q.gather = '.'
       end
     end
 
     # @return [Array]
     def get_003_categories
-      hl = @hl
-      hl.ask("Categories? (write one on each line, then press '.' then press 'Enter')") do |q|
+      @@hl.ask("Categories? (write one on each line, then press '.' then press 'Enter')") do |q|
         q.gather = '.'
       end
     end
 
     # @return [String]
     def get_004_file_format
-      hl = @hl
-      hl.choose do |menu|
+      @@hl.choose do |menu|
         menu.header = "Choose whether you want HTML or Markdown"
         menu.choice "html" do
           return "html"
@@ -90,18 +79,17 @@ module Mkmatter
 
     # @return [String]
     def get_005_extra_fields
-      hl = @hl
       fields = {}
       custom_fields = nil
       cfh = nil
-      if hl.agree("Do you want to add custom fields? ", true)
-        hl.say(<<~EXTRA_FIELDS)
-        These fields will be usable as {{LAYOUT_TYPE.FIELD}} in pages/posts etc.
-        Your fields should be inputted as FIELD=>TEXT HERE
-        Type 'EOL' on a new line then press Enter when you are done.
-        <%= color('NOTE', :bold, RED) %>: Input is <%= color('NOT', :bold, RED) %> evaluated!
+      if @@hl.agree("Do you want to add custom fields? ", true)
+        @@hl.say(<<~EXTRA_FIELDS)
+          These fields will be usable as {{LAYOUT_TYPE.FIELD}} in pages/posts etc.
+          Your fields should be inputted as FIELD=>TEXT HERE
+          Type 'EOL' on a new line then press Enter when you are done.
+          <%= color('NOTE', :bold, RED) %>: Input is <%= color('NOT', :bold, RED) %> evaluated!
         EXTRA_FIELDS
-        custom_fields = hl.ask("Fields?") do |q|
+        custom_fields = @@hl.ask('Fields?') do |q|
           q.gather = '.'
         end
       end
@@ -109,32 +97,30 @@ module Mkmatter
         custom_fields.each do |field|
           fields.store(field.to_sym, 'nil')
         end
-      end        
+      end
       if custom_fields.empty?
-        hl.say("No extra fields were added.")
+        @@hl.say('No extra fields were added.')
         return
       else
-        hl.say("#{fields} #{fields.class}")
-        cfh = hl.ask("Value of field '<%= key %>'?") do |q|
+        @@hl.say("#{fields} #{fields.class}")
+        cfh = @@hl.ask("Value of field '<%= key %>'?") do |q|
           q.gather = fields
         end
       end
       cfh
     end
 
-    # @return [OpenStruct]
     def get_006_summary
-      hl = @hl
       summary = nil
-      summary_if = hl.agree("Summary? ", true)
+      summary_if = @@hl.agree('Summary? ', true)
       if summary_if
-        summary = hl.ask(<<~SUMMARYDOC) do |q|
+        summary = @@hl.ask(<<~SUMMARYDOC) do |q|
           Input a summary of the post.
           This will be outputted as a summary in the front matter.
           This is useful for a post that is long and you want to
           show a summary of the post.
         SUMMARYDOC
-          q.gather = "."
+          q.gather = '.'
         end
       end
       summary.join("\n")
