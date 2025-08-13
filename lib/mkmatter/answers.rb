@@ -1,16 +1,10 @@
 require 'yaml'
 require 'time'
-require 'highline'
 require 'mkmatter/helpers'
 module Mkmatter
   class Answers
-    attr_accessor :title, :tags, :categories
-    attr_accessor :date, :draft
-    attr_accessor :slug_date, :answer_hash
-    attr_accessor :published, :file_format
-    attr_accessor :matter
-    attr_accessor :extra_fields
-    attr_accessor :summary
+    attr_accessor :title, :tags, :categories, :date, :draft, :slug_date, \
+                  :answer_hash, :published, :file_format, :matter, :extra_fields, :summary
 
     def initialize(question_hash, publish, include_post_fields = true)
       @title        = question_hash[:title]
