@@ -1,14 +1,14 @@
-require "thor"
-require "highline"
-require "slugity/extend_string"
-require "yaml"
 require "active_support/all"
-require "terminal-table"
-require "os"
-require "rbconfig"
+require "highline"
 require "mkmatter/version"
 require "mkmatter/cli/subs"
 require 'mkmatter/cli/descriptions'
+require "os"
+require "rbconfig"
+require "slugity"
+require "terminal-table"
+require "thor"
+require "yaml"
 
 module Mkmatter
   module App
@@ -96,15 +96,16 @@ module Mkmatter
         @questions = Mkmatter::Questions.new.ask(options[:type], options[:include_post_qs])
         answers = Mkmatter::Answers.new(@questions, options[:publish], options[:include_post_qs])
         draft_folder = "_drafts"
-        filename = [].concat([answers.slug_date, "-", answers.title.to_slug, ".", answers.file_format.downcase]).join
+        filename = [].concat([answers['slug_date'], '-', Slugity::Convert.slug(answers['title']), '.', answers['file_format'].downcase]).join
 
         path = Pathname("./#{filename}").realdirpath
-        if HILINE.agree("Would you like to put this page into a subdirectory? ", true)
-          HILINE.say(<<~FOLDERDOC)
+        hl = HighLine.new
+        if hl.agree("Would you like to put this page into a subdirectory? ", true)
+          hl.say(<<~FOLDERDOC)
             What path? (directories will be created if they don't exist, relative to Jekyll root)
-            
+
           FOLDERDOC
-          folder = HILINE.ask("? ") do |q|
+          folder = hl.ask("? ") do |q|
             q.confirm = true
             q.default = "."
             q.validate = /^[^\/].*$/
@@ -113,12 +114,12 @@ module Mkmatter
           end
           folder = Pathname(folder)
           if options[:'dry-run']
-            HILINE.say("Would create #{File.join(Pathname("."), folder)}")
+            hl.say("Would create #{File.join(Pathname("."), folder)}")
           else
             begin
               FileUtils.mkdir_p(File.join(Mkmatter::Methods.get_jekyll_root, folder))
             rescue Errno::EEXIST
-              HILINE.say("<%= color('Error', :red, :bold) %>:Insufficient Permissions")
+              hl.say("<%= color('Error', :red, :bold) %>:Insufficient Permissions")
               exit 1
             end
           end
@@ -132,8 +133,8 @@ module Mkmatter
           end
         end
         if options[:'dry-run']
-          HILINE.say("Would create '#{path}'")
-          HILINE.say("Would output \n#{answers.to_yaml(indentation: 2)}\n---\n\n")
+          hl.say("Would create '#{path}'")
+          hl.say("Would output \n#{answers.to_yaml(indentation: 2)}\n---\n\n")
         else
           File.open(path.to_path, "a") do |fd|
             fd.puts answers.to_yaml(indentation: 2)
