@@ -2,7 +2,7 @@ require 'yaml'
 require 'time'
 require 'mkmatter/helpers'
 module Mkmatter
-  class Answers
+  class Answers < Object
     attr_accessor :title, :tags, :categories, :date, :draft, :slug_date, \
                   :answer_hash, :published, :file_format, :matter, :extra_fields, :summary
 
@@ -14,9 +14,11 @@ module Mkmatter
       end
       @tags         = question_hash[:tags] if question_hash[:tags].nil? == false
       @categories   = question_hash[:categories] if question_hash[:categories].nil? == false
-      Time.zone     =  get_time_zone_full(Time.now.getlocal) || 'Eastern Time (US & Canada)' if (include_post_fields == true || @layout == 'post')
+      if include_post_fields == true || @layout == 'post'
+        Time.zone =  get_time_zone_full(Time.now.getlocal) || 'Eastern Time (US & Canada)'
+      end
       # Time.zone     = question_hash[:time_zone] || Time.now.zone
-      @now           = Time.zone.now || Time.now.getlocal
+      @now = Time.zone.now || Time.now.getlocal
       @date         = @now.to_s if include_post_fields == true
       @slug_date    = @now.strftime('%Y-%m-%d') if include_post_fields == true
       @published    = publish
@@ -26,15 +28,15 @@ module Mkmatter
         @summary = question_hash[:summary] unless question_hash[:summary].empty?
       end
 
-      @matter      = {
-          layout:     @layout,
-          title:      @title,
+      @matter = {
+        layout: @layout,
+        title: @title
       }
-      if @layout == 'post' or include_post_fields
-        @matter[:tags] =       @tags if @tags
+      if @layout == 'post' || include_post_fields
+        @matter[:tags] = @tags if @tags
         @matter[:categories] = @categories if @categories
-        @matter[:summary] =    @summary if @summary
-        @matter[:date] =       @date 
+        @matter[:summary] = @summary if @summary
+        @matter[:date] = @date
 
       end
       if @draft
@@ -46,19 +48,22 @@ module Mkmatter
       @matter[:published] = @published if publish
     end
 
-        # @return [Hash] returns attribute `.matter`
+    # @return [Hash] returns attribute `.matter`
     def to_h
       @matter
     end
 
+    def [](arg)
+      self.instance_variable_get("@#{arg}")
+    end
     # @param [Hash] hash other hash
     # @return [nil] merges hash into attribute `.matter`
     def to_h=(hash)
       @matter.merge!(hash)
     end
+
     def to_yaml(*args, **kwargs)
       @matter.stringify_keys.to_yaml(*args, **kwargs)
     end
-
   end
 end
