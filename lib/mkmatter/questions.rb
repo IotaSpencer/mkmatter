@@ -30,12 +30,11 @@ module Mkmatter
       end
       known_questions.each do |m|
         @answers[:layout] = type
-        @answers[m.to_s.gsub(/^get_[0-9]{3}_/, '')] = method(m).call
+        @answers[m.to_s.gsub(/^get_[0-9]{3}_/, '').to_sym] = method(m).call
       end
       @answers
     end
 
-    # @!visibility private
     def initialize
       @answers = {}
     end
@@ -47,13 +46,15 @@ module Mkmatter
       else
         title
       end
+      title # =>
     end
 
     # @return [Array]
     def get_002_tags
-      @@hl.ask("Tags? (write one on each line, then press '.' then press 'Enter')") do |q|
+      tags = @@hl.ask("Tags? (write one on each line, then press '.' then press 'Enter') ") do |q|
         q.gather = '.'
       end
+      tags
     end
 
     # @return [Array]
@@ -80,7 +81,7 @@ module Mkmatter
     # @return [String]
     def get_005_extra_fields
       fields = {}
-      custom_fields = nil
+      custom_fields = []
       cfh = nil
       if @@hl.agree("Do you want to add custom fields? ", true)
         @@hl.say(<<~EXTRA_FIELDS)
@@ -93,7 +94,7 @@ module Mkmatter
           q.gather = '.'
         end
       end
-      if !custom_fields.empty?
+      unless custom_fields.empty?
         custom_fields.each do |field|
           fields.store(field.to_sym, 'nil')
         end
@@ -102,7 +103,7 @@ module Mkmatter
         @@hl.say('No extra fields were added.')
         return
       else
-        @@hl.say("#{fields} #{fields.class}")
+        # @@hl.say("#{fields} #{fields.class}")
         cfh = @@hl.ask("Value of field '<%= key %>'?") do |q|
           q.gather = fields
         end
@@ -123,7 +124,7 @@ module Mkmatter
           q.gather = '.'
         end
       end
-      summary.join("\n")
+      summary.join("\n") if summary
     end
   end
 end
