@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'activesupport', '~> 8.0.2'
   spec.add_runtime_dependency 'front_matter_parser', '~> 1.0.1'
-  spec.add_runtime_dependency 'git', '~> 3.1.0'
+  spec.add_runtime_dependency 'git', '>= 3.1', '< 4.5'
   spec.add_runtime_dependency 'highline', '~> 3.1.2'
   spec.add_runtime_dependency 'micro_install', '~> 0.4.2'
   spec.add_runtime_dependency 'os', '~> 1.1.4'
