@@ -45,7 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rake', '13.2.1'
   spec.add_runtime_dependency 'slugity', '~> 1.1'
   spec.add_runtime_dependency 'terminal-table', '~> 4.0.0'
-  spec.add_runtime_dependency 'thor', '~> 1.4.0'
+  spec.add_runtime_dependency 'thor', '>= 1.4', '< 1.6'
 
   spec.add_development_dependency 'bump', '~> 0.10.0'
   spec.add_development_dependency 'bundler', '~> 2.6.9'
