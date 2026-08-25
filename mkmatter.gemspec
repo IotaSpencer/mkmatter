@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'micro_install', '~> 0.4.2'
   spec.add_runtime_dependency 'os', '~> 1.1.4'
   spec.add_runtime_dependency 'paint', '~> 2.3.0'
-  spec.add_runtime_dependency 'rake', '13.2.1'
+  spec.add_runtime_dependency 'rake', '13.4.2'
   spec.add_runtime_dependency 'slugity', '~> 1.1'
   spec.add_runtime_dependency 'terminal-table', '~> 4.0.0'
   spec.add_runtime_dependency 'thor', '~> 1.4.0'
